@@ -6,19 +6,26 @@
     
 
     
-    <title>c | Keeppassion</title>
+    <title>创建对象（一）：工厂模式、构造函数模式 | Keeppassion</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta property="og:type" content="website">
-<meta property="og:title" content="c">
-<meta property="og:url" content="http://example.com/c/index.html">
+    <meta name="keywords" content="ECMAScript" />
+    
+    <meta name="description" content="一、工厂模式工厂模式就是使用函数来封装 以特定接口创建对象的细节。 12345678910111213function createPerson(name, age, job) &amp;#123;	var 0 &#x3D; new Object();	o.name &#x3D; name;	o.age &#x3D; age;	o.job &#x3D; job;	o.sayName &#x3D; function() &amp;#123;		alert(this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建对象（一）：工厂模式、构造函数模式">
+<meta property="og:url" content="http://example.com/2021/01/28/ES003/index.html">
 <meta property="og:site_name" content="Keeppassion">
+<meta property="og:description" content="一、工厂模式工厂模式就是使用函数来封装 以特定接口创建对象的细节。 12345678910111213function createPerson(name, age, job) &amp;#123;	var 0 &#x3D; new Object();	o.name &#x3D; name;	o.age &#x3D; age;	o.job &#x3D; job;	o.sayName &#x3D; function() &amp;#123;		alert(this">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-01-08T12:18:49.000Z">
-<meta property="article:modified_time" content="2021-01-08T12:18:49.219Z">
+<meta property="og:image" content="http://example.com/2021/01/28/ES003/001.jpeg">
+<meta property="article:published_time" content="2021-01-28T12:27:06.000Z">
+<meta property="article:modified_time" content="2021-01-28T13:33:43.309Z">
 <meta property="article:author" content="Li Yanran">
+<meta property="article:tag" content="ECMAScript">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/01/28/ES003/001.jpeg">
     
 
     
@@ -139,24 +146,56 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <em class="page-title-link" data-url="/c/index.html">c</em>
+    uncategorized
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="page-" class="article article-single article-type-page" itemscope itemprop="blogPost">
+                            <article id="post-ES003" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        c
+        创建对象（一）：工厂模式、构造函数模式
         </h1>
     
 
             </header>
         
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/01/28/ES003/" class="article-date">
+       <time datetime="2021-01-28T12:27:06.000Z" itemprop="datePublished">2021-01-28</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2021/01/28/ES003/" class="article-date">
+     <time datetime="2021-01-28T13:33:43.309Z" itemprop="dateModified">2021-01-28</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ECMAScript/" rel="tag">ECMAScript</a>
+    </div>
+
+                
+
+                
+
+            </div>
         
         
         <div class="article-entry" itemprop="articleBody">
@@ -166,14 +205,47 @@
 
             
 
-            
+            <h3 id="一、工厂模式"><a href="#一、工厂模式" class="headerlink" title="一、工厂模式"></a>一、工厂模式</h3><p>工厂模式就是使用函数来封装 以特定接口创建对象的细节。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="number">0</span> = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">	o.name = name;</span><br><span class="line">	o.age = age;</span><br><span class="line">	o.job = job;</span><br><span class="line">	o.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		alert(<span class="built_in">this</span>.name);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 = createPerson(<span class="string">&quot;Lily&quot;</span>, <span class="number">25</span>, <span class="string">&quot;Software Engineering&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> person2 = createPerson(<span class="string">&quot;XiaoMing&quot;</span>, <span class="number">28</span>, <span class="string">&quot;Teacher&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>工厂模式虽然解决了创建多个相似对象的问题，但是没有解决对象识别的问题（即怎样知道一个对象的类型）。</p>
+<p>因此又出现了构造函数模式。</p>
+<h3 id="二、构造函数"><a href="#二、构造函数" class="headerlink" title="二、构造函数"></a>二、构造函数</h3><p>ECMAScript 中的构造函数可以用来创建特定类型的对象。像 Object、Array 这样的原生构造函数，在运行时会自动出现在执行环境中。此外，也可以创建自定义的构造函数，从而定义自定义对象类型的属性和方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = name;</span><br><span class="line">	<span class="built_in">this</span>.age = age;</span><br><span class="line">	<span class="built_in">this</span>.job = job;</span><br><span class="line">	<span class="built_in">this</span>.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		alert(<span class="built_in">this</span>.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">&quot;Lily&quot;</span>, <span class="number">25</span>, <span class="string">&quot;Software Engineering&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">&quot;XiaoMing&quot;</span>, <span class="number">28</span>, <span class="string">&quot;Teacher&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>Person 函数与 createPerson 函数的区别：</p>
+<ul>
+<li>没有显示地创建对象</li>
+<li>直接将属性和方法赋值给了 this 对象</li>
+<li>没有 return 语句</li>
+</ul>
+<p>此外，构造函数都应该以一个大写字母开头，非构造函数应该以一个小写字母开头。</p>
+<p>要创建 Person 对象的信实例，必须使用 new 操作符。以这种方式调用构造函数实际上会经历一下几个步骤：</p>
+<p>1）创建一个新对象</p>
+<p>2）将构造函数的作用域赋值给新对象（因此 this 指向这个新对象）</p>
+<p>3）执行构造函数中的代码（为这个新对象添加属性）</p>
+<p>4）返回新对象</p>
+<p>在前面的例子中，person1 和 person2 分别保存着 Person 的一个不同的实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert(person1 <span class="keyword">instanceof</span> Person);  <span class="comment">// true</span></span><br><span class="line">alert(person2 <span class="keyword">instanceof</span> Person);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+
+<p>创建自定义的构造函数意味着将来可以将它的实例类型标识为一种特定的类型。</p>
+<h4 id="构造函数："><a href="#构造函数：" class="headerlink" title="构造函数："></a>构造函数：</h4><p>构造函数与其他函数的唯一区别在于，调用他们的方式不同。</p>
+<p>任何函数只要通过 new 操作符来调用，那它就可以作为构造函数；</p>
+<p>任何函数如果不通过 new 操作符来调用，那它和普通函数没什么区别。</p>
+<h4 id="构造函数的问题："><a href="#构造函数的问题：" class="headerlink" title="构造函数的问题："></a>构造函数的问题：</h4><p>构造函数的主要问题在于，每个方法都要在每个实例上重新构造一遍。每个 Person 实例都包含一个不同的 Function 实例。</p>
+<p>然而，创建两个完成同样任务的 Function 实例是没有必要的；况且有 this 对象在，根本不用在执行代码前就把函数绑定到特定对象上面。可以像下面这样，通过把函数定义转移到构造函数外面来解决这个问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = name;</span><br><span class="line">	<span class="built_in">this</span>.age = age;</span><br><span class="line">	<span class="built_in">this</span>.job = job;</span><br><span class="line">	<span class="built_in">this</span>.sayName = sayName;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	alert(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样在构造函数内部，我们将 sayName 属性设置成等于全局的 sayName 函数，这样一来，由于 sayName 包含的是一个指向函数的指针，因此 person1 和 person2 对象就共享了在全局作用域中定义的同一个 sayName( ) 函数。</p>
+<p>但是，如果对象需要定义很多方法，就要定义很多个全局函数。那么这个自定义的引用类型就毫无封装性可言了。</p>
+<p>因此，我们使用原型模式来解决这个问题。</p>
+<p><img src="/2021/01/28/ES003/001.jpeg" alt="再去一次迪士尼吧！"></p>
+
         </div>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="http://example.com/c/index.html" data-id="ckkpiv9hz0000y0ughv9m75tv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://example.com/2021/01/28/ES003/" data-id="ckkpiv9i60004y0ug2itb29zx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -243,16 +315,17 @@
             "@type": "Person",
             "name": "Li Yanran"
         },
-        "headline": "c",
-        "image": "http://example.com",
-        
-        
-        "datePublished": "2021-01-08",
-        "dateCreated": "2021-01-08",
-        "dateModified": "2021-01-08",
-        "url": "http://example.com/c/index.html",
-        "description": "",
-        "wordCount": 1
+        "headline": "创建对象（一）：工厂模式、构造函数模式",
+        "image": "http://example.com/2021/01/28/ES003/001.jpeg",
+        "keywords": "ECMAScript",
+        "genre": "",
+        "datePublished": "2021-01-28",
+        "dateCreated": "2021-01-28",
+        "dateModified": "2021-01-28",
+        "url": "http://example.com/2021/01/28/ES003/",
+        "description": "一、工厂模式工厂模式就是使用函数来封装 以特定接口创建对象的细节。
+12345678910111213function createPerson(name, age, job) &#123;	var 0 = new Object();	o.name = name;	o.age = age;	o.job = job;	o.sayName = function() &#123;		alert(this",
+        "wordCount": 295
     }
 </script>
 
@@ -329,6 +402,29 @@
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2021/02/03/HTTP001/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            网络协议分层、HTTP协议发展历史、HTTP三次握手
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2021/01/27/ES002/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">基本包装类型</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -531,7 +627,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://example.com/c/index.html';
+    var disqus_url = 'http://example.com/2021/01/28/ES003/';
     
     (function() {
     var dsq = document.createElement('script');
