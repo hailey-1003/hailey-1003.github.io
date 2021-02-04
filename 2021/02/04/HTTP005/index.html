@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>CORS跨域资源共享、CORS预请求 | Keeppassion</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="HTTP" />
+    
+    <meta name="description" content="一、CORS 跨域资源共享CORS 全称为 Cross-origin resourse sharing，即跨域资源共享，它允许浏览器向跨域服务器发送 Ajax 请求，克服了 Ajax 只能同源使用的限制。 JSONP 是绕过了同源限制，发送的也不是 Ajax 请求；CORS 直接允许浏览器向跨域的服务器发生 Ajax 请求。 CORS 简单来说就是，服务器允许你跨域访问它，客户端就可以跨域访问它；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CORS跨域资源共享、CORS预请求">
+<meta property="og:url" content="http://example.com/2021/02/04/HTTP005/index.html">
+<meta property="og:site_name" content="Keeppassion">
+<meta property="og:description" content="一、CORS 跨域资源共享CORS 全称为 Cross-origin resourse sharing，即跨域资源共享，它允许浏览器向跨域服务器发送 Ajax 请求，克服了 Ajax 只能同源使用的限制。 JSONP 是绕过了同源限制，发送的也不是 Ajax 请求；CORS 直接允许浏览器向跨域的服务器发生 Ajax 请求。 CORS 简单来说就是，服务器允许你跨域访问它，客户端就可以跨域访问它；">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/02/04/HTTP005/001.jpeg">
+<meta property="article:published_time" content="2021-02-04T08:25:36.000Z">
+<meta property="article:modified_time" content="2021-02-04T14:35:47.932Z">
+<meta property="article:author" content="Li Yanran">
+<meta property="article:tag" content="HTTP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/02/04/HTTP005/001.jpeg">
+    
+
+    
+        <link rel="alternate" href="/" title="Keeppassion" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    uncategorized
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-HTTP005" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        CORS跨域资源共享、CORS预请求
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/02/04/HTTP005/" class="article-date">
+       <time datetime="2021-02-04T08:25:36.000Z" itemprop="datePublished">2021-02-04</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2021/02/04/HTTP005/" class="article-date">
+     <time datetime="2021-02-04T14:35:47.932Z" itemprop="dateModified">2021-02-04</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/HTTP/" rel="tag">HTTP</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <h2 id="一、CORS-跨域资源共享"><a href="#一、CORS-跨域资源共享" class="headerlink" title="一、CORS 跨域资源共享"></a>一、CORS 跨域资源共享</h2><p>CORS 全称为 Cross-origin resourse sharing，即跨域资源共享，它允许浏览器向跨域服务器发送 Ajax 请求，克服了 Ajax 只能同源使用的限制。</p>
+<p>JSONP 是绕过了同源限制，发送的也不是 Ajax 请求；CORS 直接允许浏览器向跨域的服务器发生 Ajax 请求。</p>
+<p>CORS 简单来说就是，服务器允许你跨域访问它，客户端就可以跨域访问它；服务器不允许你跨域访问它，客户端就不可以跨域访问它。</p>
+<p><strong>这个方式只需要在服务器端做一些配置，客户端只需要保持原有的 Ajax 代码即可。</strong></p>
+<p>我们可以在服务器端增加以下代码（node.js）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">response.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">  <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>: <span class="string">&#x27;*&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>注意：不论是否有这个，浏览器都会向服务器发送请求，因为浏览器并不知道这个请求是不是跨域请求。并且浏览器会接收服务器返回的内容，只不过浏览器在接收到数据返回的时候，会发现里面没有 Access-Control-Allow-Origin 并且设置为允许。那么浏览器会把请求返回的内容忽略掉，并且在命令行里报错。</p>
+<p>也就是说，<strong>请求已经发送了，内容也返回了，只不过浏览器在解析了返回的内容以后，发现这是不允许的，所以拦截了。</strong>这是浏览器提供的功能。例如我们使用 curl 发送请求，它是没有跨域的概念的，任何的请求都是可以发出并且拿到返回的内容。</p>
+<h2 id="二、CORS预请求"><a href="#二、CORS预请求" class="headerlink" title="二、CORS预请求"></a>二、CORS预请求</h2><p>在发送 CORS 请求时，浏览器检测到跨域请求，会自动发出一个 OPTIONS 请求来检验本次请求是否被服务器接受。服务器接收到该预请求之后，就会返回与 CORS 相关的响应头。服务器通过了 CORS 跨域请求后，客户端才会发送正式的数据。</p>
+<p>所以整个请求过程其实是发生了两次请求：预请求、实际数据请求。可以参考下图：</p>
+<img src="/2021/02/04/HTTP005/001.jpeg">
+
+
+
+<p>一个 OPTIONS 请求一般会携带下面两个与 CORS 相关的头：</p>
+<ul>
+<li><code>Access-Control-Request-Method</code>：本次预检请求的请求方法</li>
+<li><code>Access-Control-Request-Headers</code>：本次请求所携带的自定义首部字段</li>
+</ul>
+<p>服务端收到该预请求后，会返回与CORS相关的响应头，主要会包括下面几个：</p>
+<ul>
+<li><code>Access-Control-Allow-Origin</code>：服务器允许的跨域请求源</li>
+<li><code>Access-Control-Allow-Methods</code>：服务器允许的请求方法</li>
+<li><code>Access-Control-Allow-Headers</code> ：服务器允许的自定义的请求首部字段</li>
+<li><code>Access-Control-Max-Age</code>：服务器允许以这种方式发生跨域请求的最长时间（单位为s），这段时间内不需要再发送预请求进行验证，可以直接发送正式的请求</li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<p>1）在上面的两次请求中，预请求只是一个检查的过程，它不会携带任何请求的参数；预请求通过后的请求才会真正的携带请求参数与服务器进行数据通信。</p>
+<p>2）若服务器对预检请求没有任何响应，那么浏览器不知道服务器是否支持CORS而不会发送后续的实际请求；若服务器不支持当前的跨域访问，浏览器也不会发送后续请求。</p>
+</blockquote>
+<h4 id="发生预请求的条件"><a href="#发生预请求的条件" class="headerlink" title="发生预请求的条件"></a>发生预请求的条件</h4><p>预请求并不是 CORS 请求的必须过程，在满足一定条件下是不需要发送预请求的。判断预请求发生的条件：<strong>是否是简单请求</strong>。如果是简单请求，则会直接发送具体的请求而不会发送预请求。具体来说：</p>
+<p>满足下面的<strong>所有条件</strong>就不会产生预检请求，即该请求是简单请求：</p>
+<ul>
+<li>请求方式是 <strong>GET</strong>、<strong>HEAD</strong>、<strong>POST</strong>中的任意一个</li>
+<li> Content-Type 的值必须是 <strong>test/plain</strong>、<strong>multipart/form-data</strong>、<strong>application/x-www-form-urlencoded</strong>中的任意一个</li>
+<li>必须是以下定义对CORS安全的首部字段集合，不能是集合之外的其他首部字段：Accept、Accept-Language、Content-Language、Content-Type、DPR、Downlink、Save-Data、Viewport-Width、Width</li>
+</ul>
+<p>满足上面所有的请求才不会发送预请求。在实际项目中我们的请求格式可能是 application/json 格式编码，或者使用自定义请求头，这样都会触发CORS的预请求。</p>
+<h4 id="发送预请求的实例："><a href="#发送预请求的实例：" class="headerlink" title="发送预请求的实例："></a>发送预请求的实例：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;http://bar.other/resources/post-here/&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> body = <span class="string">&#x27;&lt;?xml version=&quot;1.0&quot;?&gt;&lt;person&gt;&lt;name&gt;Arun&lt;/name&gt;&lt;/person&gt;&#x27;</span>;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callCors</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(xhr)</span><br><span class="line">    &#123;</span><br><span class="line">      xhr.open(<span class="string">&#x27;POST&#x27;</span>, url, <span class="literal">true</span>);</span><br><span class="line">      xhr.setRequestHeader(<span class="string">&#x27;X-PINGOTHER&#x27;</span>, <span class="string">&#x27;pingpong&#x27;</span>);</span><br><span class="line">      xhr.setRequestHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/xml&#x27;</span>);</span><br><span class="line">      xhr.onreadystatechange = handler;</span><br><span class="line">      xhr.send(body); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面请求中在请求中添加了自定义首部字段 X-PINGOTHER，并且请求的 Content-Type 值 application/xml。因此该请求首先会触发一个预检请求。具体的过程见下图：</p>
+<img src="/2021/02/04/HTTP005/002.png">
+
+<p>通过上图可以看到浏览器实际与服务器产生了2次交互，最后一次会将请求参数传给服务器。这样一个 CORS 请求过程就完成了。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2021/02/04/HTTP005/" data-id="ckkqys32200065nuggmrmfcyq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Li Yanran"
+        },
+        "headline": "CORS跨域资源共享、CORS预请求",
+        "image": "http://example.com/2021/02/04/HTTP005/001.jpeg",
+        "keywords": "HTTP",
+        "genre": "",
+        "datePublished": "2021-02-04",
+        "dateCreated": "2021-02-04",
+        "dateModified": "2021-02-04",
+        "url": "http://example.com/2021/02/04/HTTP005/",
+        "description": "一、CORS 跨域资源共享CORS 全称为 Cross-origin resourse sharing，即跨域资源共享，它允许浏览器向跨域服务器发送 Ajax 请求，克服了 Ajax 只能同源使用的限制。
+JSONP 是绕过了同源限制，发送的也不是 Ajax 请求；CORS 直接允许浏览器向跨域的服务器发生 Ajax 请求。
+CORS 简单来说就是，服务器允许你跨域访问它，客户端就可以跨域访问它；",
+        "wordCount": 198
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ppoffice/hexo-theme-hueman" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2021/02/04/HTTP004/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">同源政策、JSONP</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/04/HTTP005/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/04/HTTP005/001.jpeg)" alt="CORS跨域资源共享、CORS预请求" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/04/HTTP005/" class="title">CORS跨域资源共享、CORS预请求</a></p>
+                            <p class="item-date"><time datetime="2021-02-04T08:25:36.000Z" itemprop="datePublished">2021-02-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/04/HTTP004/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/04/HTTP004/001.jpeg)" alt="同源政策、JSONP" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/04/HTTP004/" class="title">同源政策、JSONP</a></p>
+                            <p class="item-date"><time datetime="2021-02-04T06:11:36.000Z" itemprop="datePublished">2021-02-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/04/HTTP003/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/04/HTTP003/001.png)" alt="HTTP报文格式" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/04/HTTP003/" class="title">HTTP报文格式</a></p>
+                            <p class="item-date"><time datetime="2021-02-04T05:03:57.000Z" itemprop="datePublished">2021-02-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/04/HTTP002/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/04/HTTP002/001.jpeg)" alt="URI、URL、URN" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/04/HTTP002/" class="title">URI、URL、URN</a></p>
+                            <p class="item-date"><time datetime="2021-02-04T03:32:02.000Z" itemprop="datePublished">2021-02-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/03/HTTP001/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/03/HTTP001/001.png)" alt="网络协议分层、HTTP协议发展历史、HTTP三次握手" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/03/HTTP001/" class="title">网络协议分层、HTTP协议发展历史、HTTP三次握手</a></p>
+                            <p class="item-date"><time datetime="2021-02-03T08:52:43.000Z" itemprop="datePublished">2021-02-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/HTTP/" style="font-size: 20px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="">暂无</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Li Yanran</p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://example.com/2021/02/04/HTTP005/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
