@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>（十）ES6：类与继承 | Keeppassion</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="ES" />
+    
+    <meta name="description" content="关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。 ​    在 ES6 中新增了class关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子： 1234567891011class People &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（十）ES6：类与继承">
+<meta property="og:url" content="http://example.com/2021/02/22/ES010/index.html">
+<meta property="og:site_name" content="Keeppassion">
+<meta property="og:description" content="关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。 ​    在 ES6 中新增了class关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子： 1234567891011class People &amp;#123;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/02/22/ES010/1.jpeg">
+<meta property="article:published_time" content="2021-02-22T12:19:12.000Z">
+<meta property="article:modified_time" content="2021-02-22T14:04:09.822Z">
+<meta property="article:author" content="Li Yanran">
+<meta property="article:tag" content="ES">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/02/22/ES010/1.jpeg">
+    
+
+    
+        <link rel="alternate" href="/" title="Keeppassion" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    uncategorized
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-ES010" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        （十）ES6：类与继承
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/02/22/ES010/" class="article-date">
+       <time datetime="2021-02-22T12:19:12.000Z" itemprop="datePublished">2021-02-22</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2021/02/22/ES010/" class="article-date">
+     <time datetime="2021-02-22T14:04:09.822Z" itemprop="dateModified">2021-02-22</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ES/" rel="tag">ES</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。</p>
+<p>​    在 ES6 中新增了<code>class</code>关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">showName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> People(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p1)</span><br></pre></td></tr></table></figure>
+<p>我们来看一下输出：</p>
+<img src="/2021/02/22/ES010/1.jpeg" width="50%">
+
+<p>我们可以看出来，这和 ES5 中组合使用构造函数模式与原型模式得到的结果一致。所以我们也把 class 叫做“语法糖”，因为它可以让我们更快乐的写代码（因为写法更简单了嘿嘿）。我们在看一下 ES6 中如何实现继承，ES6 中出现了一个新的关键字<code>extends</code>用于类的继承。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Coder</span> <span class="keyword">extends</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age, skill</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(name, age) <span class="comment">// 从父类People中继承name和age属性</span></span><br><span class="line">    <span class="built_in">this</span>.skill = skill</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">showSkill</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.skill)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c1 = <span class="keyword">new</span> Coder(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;code&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(c1)</span><br></pre></td></tr></table></figure>
+<p>我们在看一下输出结果：</p>
+<img src="/2021/02/22/ES010/2.jpeg" width="50%">
+
+<p>在 ES6 中，我们还可以使用设置方法的形式设置属性，具体看下例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">showName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> People(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p1.sex) <span class="comment">// female</span></span><br></pre></td></tr></table></figure>
+<p>我们通过<code>get</code>关键字设置了一个属性 sex，并且通过 p1.sex 读取了 sex 属性。但是 get 关键字总能够让 sex 属性被读，并不能让 sex 属性被写。想让 sex 属性被写我们还需要<code>set</code>。但是我们要注意不能这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误演示</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title">sex</span>(<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>.sex = val</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> People(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line">p1.sex = <span class="string">&#x27;male&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>以上代码会提示“Maximum call stack size exceeded”，原因是陷入了死循环。因为执行 p1.sex = ‘male’ 时，会调用 set sex(){} 方法。set sex(){} 方法内部设置 this.sex = val 时，也会调用 set sex(){} 方法， set sex(){} 方法内部执行 this.sex = val 时又调用了  set sex(){} 方法。因此这是一个死循环，我们应该这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">    <span class="built_in">this</span>._sex = <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>._sex</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title">sex</span>(<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>._sex = val</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> People(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p1.sex) <span class="comment">// female</span></span><br><span class="line">p1.sex = <span class="string">&#x27;male&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.sex) <span class="comment">// male</span></span><br></pre></td></tr></table></figure>
+<p>当我们需要对值进行一些业务逻辑处理再进行读和写时，就应该使用这种方法。通过这种方式设置的属性也可以被子类继承。</p>
+<p>我们再看一下如何在 ES6 中定义静态属性和方法。ES6 中使用<code>static</code>关键字定义静态方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">getCount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">5</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(People.getCount()) <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<p>ES6 的 class 内部目前并不能定义静态属性，我们可使用 ES5 中定义静态属性的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">People.count = <span class="number">1</span></span><br><span class="line"><span class="built_in">console</span>.log(People.count) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>再次强调：**<code>class</code>只是“语法糖”，使用<code>class</code>定义出的类，底层还是和 ES5 中组合使用构造函数和原型方式定义出的“类”一样。**我们可以使用 type of 方式检测上面示例中的 People，结果是 function。</p>
+<p>下面的例子使用 babel 将 ES6 转化成 ES5，让大家更好的理解一下：</p>
+<img src="/2021/02/22/ES010/3.png">
+
+
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2021/02/22/ES010/" data-id="cklgndr1c00001bug7pay7eug" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Li Yanran"
+        },
+        "headline": "（十）ES6：类与继承",
+        "image": "http://example.com/2021/02/22/ES010/1.jpeg",
+        "keywords": "ES",
+        "genre": "",
+        "datePublished": "2021-02-22",
+        "dateCreated": "2021-02-22",
+        "dateModified": "2021-02-22",
+        "url": "http://example.com/2021/02/22/ES010/",
+        "description": "关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。
+​    在 ES6 中新增了class关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子：
+1234567891011class People &#123;",
+        "wordCount": 723
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ppoffice/hexo-theme-hueman" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2021/02/19/ES009/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">（九）ES：深拷贝与浅拷贝、手写深拷贝函数</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/22/ES010/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/22/ES010/1.jpeg)" alt="（十）ES6：类与继承" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/22/ES010/" class="title">（十）ES6：类与继承</a></p>
+                            <p class="item-date"><time datetime="2021-02-22T12:19:12.000Z" itemprop="datePublished">2021-02-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/19/ES009/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/19/ES009/1.jpeg)" alt="（九）ES：深拷贝与浅拷贝、手写深拷贝函数" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/19/ES009/" class="title">（九）ES：深拷贝与浅拷贝、手写深拷贝函数</a></p>
+                            <p class="item-date"><time datetime="2021-02-19T08:25:36.000Z" itemprop="datePublished">2021-02-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/19/ES008/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/19/ES008/1.jpeg)" alt="（八）ES6：对象的扩展" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/19/ES008/" class="title">（八）ES6：对象的扩展</a></p>
+                            <p class="item-date"><time datetime="2021-02-19T03:25:36.000Z" itemprop="datePublished">2021-02-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/18/ES007/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/18/ES007/1.jpeg)" alt="（七）ES6：箭头函数" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/18/ES007/" class="title">（七）ES6：箭头函数</a></p>
+                            <p class="item-date"><time datetime="2021-02-18T13:25:36.000Z" itemprop="datePublished">2021-02-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/17/ES006/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/17/ES006/1.jpeg)" alt="（六）ES6：扩展运算符 与 rest参数" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/17/ES006/" class="title">（六）ES6：扩展运算符 与 rest参数</a></p>
+                            <p class="item-date"><time datetime="2021-02-17T09:25:36.000Z" itemprop="datePublished">2021-02-17</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="">暂无</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Li Yanran</p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://example.com/2021/02/22/ES010/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
