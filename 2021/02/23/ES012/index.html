@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>（十二）ES6：新的数据结构 Set与WeakSet | Keeppassion</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="ES" />
+    
+    <meta name="description" content="一、SetSet 和数组很相似，但是 Set 中不会出现相同的值。我们可以使用 new 来创建 Set。 12345let s &#x3D; new Set()console.log(s) &#x2F;&#x2F; Set(0) &amp;#123;&amp;#125;let s2 &#x3D; new Set([1, 2, 3, 2])console.log(s2) &#x2F;&#x2F; Set(3) &amp;#123;1, 2, 3&amp;#125; 1、Set 常用方法1）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（十二）ES6：新的数据结构 Set与WeakSet">
+<meta property="og:url" content="http://example.com/2021/02/23/ES012/index.html">
+<meta property="og:site_name" content="Keeppassion">
+<meta property="og:description" content="一、SetSet 和数组很相似，但是 Set 中不会出现相同的值。我们可以使用 new 来创建 Set。 12345let s &#x3D; new Set()console.log(s) &#x2F;&#x2F; Set(0) &amp;#123;&amp;#125;let s2 &#x3D; new Set([1, 2, 3, 2])console.log(s2) &#x2F;&#x2F; Set(3) &amp;#123;1, 2, 3&amp;#125; 1、Set 常用方法1）">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/02/23/ES012/1.jpeg">
+<meta property="article:published_time" content="2021-02-23T07:48:12.000Z">
+<meta property="article:modified_time" content="2021-02-24T09:24:48.740Z">
+<meta property="article:author" content="Li Yanran">
+<meta property="article:tag" content="ES">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/02/23/ES012/1.jpeg">
+    
+
+    
+        <link rel="alternate" href="/" title="Keeppassion" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    uncategorized
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-ES012" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        （十二）ES6：新的数据结构 Set与WeakSet
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/02/23/ES012/" class="article-date">
+       <time datetime="2021-02-23T07:48:12.000Z" itemprop="datePublished">2021-02-23</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2021/02/23/ES012/" class="article-date">
+     <time datetime="2021-02-24T09:24:48.740Z" itemprop="dateModified">2021-02-24</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ES/" rel="tag">ES</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <h2 id="一、Set"><a href="#一、Set" class="headerlink" title="一、Set"></a>一、Set</h2><p>Set 和数组很相似，但是 Set 中不会出现相同的值。我们可以使用 new 来创建 Set。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line"><span class="built_in">console</span>.log(s) <span class="comment">// Set(0) &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> s2 = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line"><span class="built_in">console</span>.log(s2) <span class="comment">// Set(3) &#123;1, 2, 3&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="1、Set-常用方法"><a href="#1、Set-常用方法" class="headerlink" title="1、Set 常用方法"></a>1、Set 常用方法</h4><h5 id="1）add"><a href="#1）add" class="headerlink" title="1）add()"></a>1）add()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line">s.add(<span class="string">&#x27;apple&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s) <span class="comment">// Set(4) &#123;1, 2, 3, &quot;apple&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>add() 方法支持链式操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line">s.add(<span class="string">&#x27;apple&#x27;</span>).add(<span class="string">&#x27;mango&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s) <span class="comment">// Set(4) &#123;1, 2, 3, &quot;apple&quot;, &quot;mango&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+<h5 id="2）delete"><a href="#2）delete" class="headerlink" title="2）delete()"></a>2）delete()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">s.delete(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s) <span class="comment">// Set(2) &#123;1, 3&#125;</span></span><br></pre></td></tr></table></figure>
+<h5 id="3）clear"><a href="#3）clear" class="headerlink" title="3）clear()"></a>3）clear()</h5><p>用于清空 Set。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">s.clear()</span><br><span class="line"><span class="built_in">console</span>.log(s) <span class="comment">// Set(0) &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+<h5 id="4）has"><a href="#4）has" class="headerlink" title="4）has()"></a>4）has()</h5><p>用于判断当前 Set 中是否包含某个数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;apple&#x27;</span>])</span><br><span class="line"><span class="built_in">console</span>.log(s.has(<span class="string">&#x27;apple&#x27;</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(s.has(<span class="string">&#x27;mango&#x27;</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、Set-的属性"><a href="#2、Set-的属性" class="headerlink" title="2、Set 的属性"></a>2、Set 的属性</h4><h5 id="1）size"><a href="#1）size" class="headerlink" title="1）size"></a>1）size</h5><p>数组使用<code>length</code>属性保存数组长度，Set 使用<code>size</code>属性保存数组长度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;apple&#x27;</span>])</span><br><span class="line"><span class="built_in">console</span>.log(s.size) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<h4 id="3、Set-的遍历"><a href="#3、Set-的遍历" class="headerlink" title="3、Set 的遍历"></a>3、Set 的遍历</h4><h5 id="1）forEach"><a href="#1）forEach" class="headerlink" title="1）forEach"></a>1）forEach</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;apple&#x27;</span>])</span><br><span class="line">s.forEach(<span class="function"><span class="params">item</span> =&gt;</span> <span class="built_in">console</span>.log(item)) <span class="comment">// 1    2    apple</span></span><br></pre></td></tr></table></figure>
+<h5 id="2）for-of-与-values-、keys-、entris"><a href="#2）for-of-与-values-、keys-、entris" class="headerlink" title="2）for of 与 values()、keys()、entris()"></a>2）for of 与 values()、keys()、entris()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;apple&#x27;</span>])</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> s) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item) <span class="comment">// 1    2    apple</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> s.keys()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item) <span class="comment">// 1    2    apple</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> s.values()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item) <span class="comment">// 1    2    apple</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> s.entries()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item[<span class="number">0</span>], item[<span class="number">1</span>]) <span class="comment">// 1 1    2 2    apple apple</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Set 的 key 与 value 是相同的。</p>
+<h4 id="4、Set-转换成-Array"><a href="#4、Set-转换成-Array" class="headerlink" title="4、Set 转换成 Array"></a>4、Set 转换成 Array</h4><p>数组转换成 Set 非常简单，把数组作为 Set 的参数就行。将 Set 转换成数组，我们可以使用<code>...</code>或者<code>Array.from()</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="keyword">let</span> arr1 = [...s] </span><br><span class="line"><span class="keyword">let</span> arr2 = <span class="built_in">Array</span>.from(s)</span><br></pre></td></tr></table></figure>
+<h2 id="二、WeakSet"><a href="#二、WeakSet" class="headerlink" title="二、WeakSet"></a>二、WeakSet</h2><p>WeakSet 与 Set的区别就是： <strong>WeakSet 中只能存储对象，存储了别的类型会报错；WeakSet 不能够遍历；WeakSet 中存储的对象都是弱引用。</strong></p>
+<p>因为 WeakSet 存储的是对象，因此对 WeakSet 使用 delete() 方法时需要注意：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ws = <span class="keyword">new</span> <span class="built_in">WeakSet</span>()</span><br><span class="line">ws.add(&#123;</span><br><span class="line">  name: <span class="string">&#x27;lily&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line">ws.delete(&#123;</span><br><span class="line">  name: <span class="string">&#x27;lily&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ws) <span class="comment">// WeakSet &#123;&#123;…&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这样并不能删除掉 { name: ‘lily’ } 对象，因为 delete 的对象和 add 进 ws 里的并不是同一个对象（并不是同一个引用），它们只是值一样，所以我们建议向下面这样 add 和 delete 对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ws = <span class="keyword">new</span> <span class="built_in">WeakSet</span>()</span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  name: <span class="string">&#x27;lily&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">ws.add(obj1)</span><br><span class="line">ws.delete(obj1)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ws) <span class="comment">// WeakSet &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>WeakSet 中存储的对象都是弱引用，ES 中的垃圾回收机制是不会考虑弱引用的，也就是垃圾回收机制不会考虑 WeakSet 对 对象的引用。假设一个 WeakSet 中存储了对象 obj1，但是别的地方并没有引用这个 obj1，那么垃圾回收机制依旧会把这个 obj1 回收掉。因此，弱引用有益于防止内存泄露。</p>
+<img src="/2021/02/23/ES012/1.jpeg">
+
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2021/02/23/ES012/" data-id="cklj8gtne000m2rug3g81180b" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Li Yanran"
+        },
+        "headline": "（十二）ES6：新的数据结构 Set与WeakSet",
+        "image": "http://example.com/2021/02/23/ES012/1.jpeg",
+        "keywords": "ES",
+        "genre": "",
+        "datePublished": "2021-02-23",
+        "dateCreated": "2021-02-23",
+        "dateModified": "2021-02-24",
+        "url": "http://example.com/2021/02/23/ES012/",
+        "description": "一、SetSet 和数组很相似，但是 Set 中不会出现相同的值。我们可以使用 new 来创建 Set。
+12345let s = new Set()console.log(s) // Set(0) &#123;&#125;let s2 = new Set([1, 2, 3, 2])console.log(s2) // Set(3) &#123;1, 2, 3&#125;
+1、Set 常用方法1）",
+        "wordCount": 635
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ppoffice/hexo-theme-hueman" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2021/02/23/ES013/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            （十三）ES6：新的数据结构 Map与WeakMap
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2021/02/23/ES011/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">（十一）ES6：新的原始数据类型 Symbol</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/24/ES018/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/24/ES018/1.jpeg)" alt="（十八）ES6：Reflect" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/24/ES018/" class="title">（十八）ES6：Reflect</a></p>
+                            <p class="item-date"><time datetime="2021-02-24T09:05:12.000Z" itemprop="datePublished">2021-02-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/24/ES017/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/24/ES017/1.png)" alt="（十七）ES6：Proxy" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/24/ES017/" class="title">（十七）ES6：Proxy</a></p>
+                            <p class="item-date"><time datetime="2021-02-24T07:30:12.000Z" itemprop="datePublished">2021-02-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/24/ES016/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/24/ES016/1.jpeg)" alt="（十六）ES6：Number与Math的扩展" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/24/ES016/" class="title">（十六）ES6：Number与Math的扩展</a></p>
+                            <p class="item-date"><time datetime="2021-02-24T05:42:12.000Z" itemprop="datePublished">2021-02-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/23/ES015/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/23/ES015/1.jpeg)" alt="（十五）ES6：正则表达式的扩展" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/23/ES015/" class="title">（十五）ES6：正则表达式的扩展</a></p>
+                            <p class="item-date"><time datetime="2021-02-23T15:50:12.000Z" itemprop="datePublished">2021-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/23/ES014/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/02/23/ES014/1.jpeg)" alt="（十四）ES6：字符串的扩展" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/02/23/ES014/" class="title">（十四）ES6：字符串的扩展</a></p>
+                            <p class="item-date"><time datetime="2021-02-23T11:40:16.000Z" itemprop="datePublished">2021-02-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="">暂无</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Li Yanran</p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://example.com/2021/02/23/ES012/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
