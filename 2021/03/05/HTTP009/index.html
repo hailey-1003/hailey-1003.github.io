@@ -6,26 +6,26 @@
     
 
     
-    <title>（十）ES6：类与继承 | Keeppassion</title>
+    <title>Cookie与Session | Keeppassion</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="ES" />
+    <meta name="keywords" content="HTTP" />
     
-    <meta name="description" content="关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。 ​    在 ES6 中新增了class关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子： 1234567891011class People &amp;#123;">
+    <meta name="description" content="一、Coookie由于 HTTP 是一种无状态的协议，服务端没有办法从网络连接上判断用户的信息。因此服务端给用户分配一个“通行证”，无论谁访问都必须带上自己的通行证。这样服务端就能够从通行证上确认客户身份了。这就是 Cookie 的工作原理。 Cookie 实际上是一小段文本信息。客户端请求服务端信息时，如果服务端需要记录该用户的状态，就会给客户端发送一个 Cookie，客户端就会把 Cookie">
 <meta property="og:type" content="article">
-<meta property="og:title" content="（十）ES6：类与继承">
-<meta property="og:url" content="http://example.com/2021/02/22/ES010/index.html">
+<meta property="og:title" content="Cookie与Session">
+<meta property="og:url" content="http://example.com/2021/03/05/HTTP009/index.html">
 <meta property="og:site_name" content="Keeppassion">
-<meta property="og:description" content="关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。 ​    在 ES6 中新增了class关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子： 1234567891011class People &amp;#123;">
+<meta property="og:description" content="一、Coookie由于 HTTP 是一种无状态的协议，服务端没有办法从网络连接上判断用户的信息。因此服务端给用户分配一个“通行证”，无论谁访问都必须带上自己的通行证。这样服务端就能够从通行证上确认客户身份了。这就是 Cookie 的工作原理。 Cookie 实际上是一小段文本信息。客户端请求服务端信息时，如果服务端需要记录该用户的状态，就会给客户端发送一个 Cookie，客户端就会把 Cookie">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/02/22/ES010/1.jpeg">
-<meta property="article:published_time" content="2021-02-22T12:19:12.000Z">
-<meta property="article:modified_time" content="2021-02-24T09:08:25.317Z">
+<meta property="og:image" content="http://example.com/2021/03/05/HTTP009/1.png">
+<meta property="article:published_time" content="2021-03-05T05:42:12.000Z">
+<meta property="article:modified_time" content="2021-03-10T06:32:16.476Z">
 <meta property="article:author" content="Li Yanran">
-<meta property="article:tag" content="ES">
+<meta property="article:tag" content="HTTP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/02/22/ES010/1.jpeg">
+<meta name="twitter:image" content="http://example.com/2021/03/05/HTTP009/1.png">
     
 
     
@@ -151,14 +151,14 @@
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-ES010" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-HTTP009" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        （十）ES6：类与继承
+        Cookie与Session
         </h1>
     
 
@@ -169,16 +169,16 @@
                 
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2021/02/22/ES010/" class="article-date">
-       <time datetime="2021-02-22T12:19:12.000Z" itemprop="datePublished">2021-02-22</time>
+    <a href="/2021/03/05/HTTP009/" class="article-date">
+       <time datetime="2021-03-05T05:42:12.000Z" itemprop="datePublished">2021-03-05</time>
     </a>
   </div>
 
 
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
-  <a href="/2021/02/22/ES010/" class="article-date">
-     <time datetime="2021-02-24T09:08:25.317Z" itemprop="dateModified">2021-02-24</time>
+  <a href="/2021/03/05/HTTP009/" class="article-date">
+     <time datetime="2021-03-10T06:32:16.476Z" itemprop="dateModified">2021-03-10</time>
   </a>
 </div>
 
@@ -188,7 +188,7 @@
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/ES/" rel="tag">ES</a>
+        <a class="tag-link-link" href="/tags/HTTP/" rel="tag">HTTP</a>
     </div>
 
                 
@@ -205,33 +205,17 @@
 
             
 
-            <p>关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。</p>
-<p>​    在 ES6 中新增了<code>class</code>关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">showName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> People(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p1)</span><br></pre></td></tr></table></figure>
-<p>我们来看一下输出：</p>
-<img src="/2021/02/22/ES010/1.jpeg" width="50%">
+            <h2 id="一、Coookie"><a href="#一、Coookie" class="headerlink" title="一、Coookie"></a>一、Coookie</h2><p>由于 HTTP 是一种无状态的协议，服务端没有办法从网络连接上判断用户的信息。因此服务端给用户分配一个“通行证”，无论谁访问都必须带上自己的通行证。这样服务端就能够从通行证上确认客户身份了。这就是 Cookie 的工作原理。</p>
+<p>Cookie 实际上是一小段文本信息。客户端请求服务端信息时，如果服务端需要记录该用户的状态，就会给客户端发送一个 Cookie，客户端就会把 Cookie 保存起来。当客户端再次请求该网站时，就会把该 Cookie 一同交给服务器。服务器检查该 Cookie，以次来辨别用户状态。服务器也可以根据需求修改 Cookie 的内容。</p>
+<p>有了Cookie这样的技术实现，服务器在接收到来自客户端浏览器的请求之后，就能够通过分析存放于请求头的Cookie得到客户端特有的信息，从而动态生成与该客户端相对应的内容。通常，我们可以从很多网站的登录界面中看到“请记住我”这样的选项，如果你勾选了它之后再登录，那么在下一次访问该网站的时候就不需要进行重复而繁琐的登录动作了，而这个功能就是通过Cookie实现的。</p>
+<p>有两个http头部是专门负责设置以及发送cookie的,它们分别是<code>Set-Cookie</code>以及<code>Cookie</code>。当服务器返回给客户端一个http响应信息时，其中如果包含Set-Cookie这个头部时，意思就是指示客户端建立一个cookie，并且在后续的http请求中自动发送这个cookie到服务器端，直到这个cookie过期。如果cookie的生存时间是整个会话期间的话，那么浏览器会将cookie保存在内存中，浏览器关闭时就会自动清除这个cookie。另外一种情况就是保存在客户端的硬盘中，浏览器关闭的话，该cookie也不会被清除，下次打开浏览器访问对应网站时，这个cookie就会自动再次发送到服务器端。一个cookie的设置以及发送过程分为以下四步：</p>
+<p>1）客户端发送一个http请求到服务器端；2）服务器端发送一个http响应到客户端，其中包含Set-Cookie头部；3）客户端发送一个http请求到服务器端，其中包含Cookie头部；4）服务器端发送一个http响应到客户端。</p>
+<p>这个通讯过程也可以用以下下示意图来描述：</p>
+<img src="/2021/03/05/HTTP009/1.png" width="50%">
 
-<p>我们可以看出来，这和 ES5 中组合使用构造函数模式与原型模式得到的结果一致。所以我们也把 class 叫做“语法糖”，因为它可以让我们更快乐的写代码（因为写法更简单了嘿嘿）。我们在看一下 ES6 中如何实现继承，ES6 中出现了一个新的关键字<code>extends</code>用于类的继承。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Coder</span> <span class="keyword">extends</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age, skill</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(name, age) <span class="comment">// 从父类People中继承name和age属性</span></span><br><span class="line">    <span class="built_in">this</span>.skill = skill</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">showSkill</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.skill)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c1 = <span class="keyword">new</span> Coder(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;code&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(c1)</span><br></pre></td></tr></table></figure>
-<p>我们在看一下输出结果：</p>
-<img src="/2021/02/22/ES010/2.jpeg" width="50%">
-
-<p>在 ES6 中，我们还可以使用设置方法的形式设置属性，具体看下例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">showName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> People(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p1.sex) <span class="comment">// female</span></span><br></pre></td></tr></table></figure>
-<p>我们通过<code>get</code>关键字设置了一个属性 sex，并且通过 p1.sex 读取了 sex 属性。但是 get 关键字总能够让 sex 属性被读，并不能让 sex 属性被写。想让 sex 属性被写我们还需要<code>set</code>。但是我们要注意不能这样写：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误演示</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title">sex</span>(<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>.sex = val</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> People(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line">p1.sex = <span class="string">&#x27;male&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>以上代码会提示“Maximum call stack size exceeded”，原因是陷入了死循环。因为执行 p1.sex = ‘male’ 时，会调用 set sex(){} 方法。set sex(){} 方法内部设置 this.sex = val 时，也会调用 set sex(){} 方法， set sex(){} 方法内部执行 this.sex = val 时又调用了  set sex(){} 方法。因此这是一个死循环，我们应该这样写：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">    <span class="built_in">this</span>._sex = <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>._sex</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title">sex</span>(<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>._sex = val</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> People(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p1.sex) <span class="comment">// female</span></span><br><span class="line">p1.sex = <span class="string">&#x27;male&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.sex) <span class="comment">// male</span></span><br></pre></td></tr></table></figure>
-<p>当我们需要对值进行一些业务逻辑处理再进行读和写时，就应该使用这种方法。通过这种方式设置的属性也可以被子类继承。</p>
-<p>我们再看一下如何在 ES6 中定义静态属性和方法。ES6 中使用<code>static</code>关键字定义静态方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">getCount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">5</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(People.getCount()) <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
-<p>ES6 的 class 内部目前并不能定义静态属性，我们可使用 ES5 中定义静态属性的方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.age = age</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">People.count = <span class="number">1</span></span><br><span class="line"><span class="built_in">console</span>.log(People.count) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-<p>再次强调：<strong>class 只是“语法糖”，使用 class 定义出的类，底层还是和 ES5 中组合使用构造函数和原型方式定义出的“类”一样。</strong>我们可以使用 type of 方式检测上面示例中的 People，结果是 function。</p>
-<p>下面的例子使用 babel 将 ES6 转化成 ES5，让大家更好的理解一下：</p>
-<img src="/2021/02/22/ES010/3.png">
-
-
+<p>Cookie 在性质上是绑定在特定域名下的，不可以跨域访问。</p>
+<h2 id="二、Session"><a href="#二、Session" class="headerlink" title="二、Session"></a>二、Session</h2><p>Session是另一种记录客户状态的机制，Cookie保存在客户端中，而Session保存在服务端。客户端访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是Session。客户端浏览器再次访问时只需要从该Session中查找该客户的状态就可以了。</p>
+<p>如果说Cookie机制是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。</p>
 
         </div>
         <footer class="article-footer">
@@ -239,7 +223,7 @@
 
 
 
-    <a data-url="http://example.com/2021/02/22/ES010/" data-id="ckm32t22o000q0nugf4ho70te" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://example.com/2021/03/05/HTTP009/" data-id="ckm32t230001t0nug50ad1ww1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -309,18 +293,17 @@
             "@type": "Person",
             "name": "Li Yanran"
         },
-        "headline": "（十）ES6：类与继承",
-        "image": "http://example.com/2021/02/22/ES010/1.jpeg",
-        "keywords": "ES",
+        "headline": "Cookie与Session",
+        "image": "http://example.com/2021/03/05/HTTP009/1.png",
+        "keywords": "HTTP",
         "genre": "",
-        "datePublished": "2021-02-22",
-        "dateCreated": "2021-02-22",
-        "dateModified": "2021-02-24",
-        "url": "http://example.com/2021/02/22/ES010/",
-        "description": "关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。
-​    在 ES6 中新增了class关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子：
-1234567891011class People &#123;",
-        "wordCount": 726
+        "datePublished": "2021-03-05",
+        "dateCreated": "2021-03-05",
+        "dateModified": "2021-03-10",
+        "url": "http://example.com/2021/03/05/HTTP009/",
+        "description": "一、Coookie由于 HTTP 是一种无状态的协议，服务端没有办法从网络连接上判断用户的信息。因此服务端给用户分配一个“通行证”，无论谁访问都必须带上自己的通行证。这样服务端就能够从通行证上确认客户身份了。这就是 Cookie 的工作原理。
+Cookie 实际上是一小段文本信息。客户端请求服务端信息时，如果服务端需要记录该用户的状态，就会给客户端发送一个 Cookie，客户端就会把 Cookie",
+        "wordCount": 25
     }
 </script>
 
@@ -401,20 +384,20 @@
         
 <nav id="article-nav">
     
-        <a href="/2021/02/23/ES011/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2021/03/05/HTTP008/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            （十一）ES6：新的原始数据类型 Symbol
+            数据协商
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2021/02/19/ES009/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2021/03/04/HTTP007/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">（九）ES：深拷贝与浅拷贝、手写深拷贝函数</p>
+        <p class="article-nav-title">HTTP长连接</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -622,7 +605,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://example.com/2021/02/22/ES010/';
+    var disqus_url = 'http://example.com/2021/03/05/HTTP009/';
     
     (function() {
     var dsq = document.createElement('script');
