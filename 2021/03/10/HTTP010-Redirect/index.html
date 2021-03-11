@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Redirect | Keeppassion</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="HTTP" />
+    
+    <meta name="description" content="我们通过 URL 请求一个资源的时候，如果发现这个资源已经不在这个 URL 指定的位置了，这个时候服务器要告诉客户端请求的资源现在在哪里，然后客户端再去请求那个地址，最后客户端才能拿到资源。 在开发服务器的时候，如果之前指定了某个资源在某个地方，如果后来把资源搬到了别的地方，不应该立即把原来的 URL 立即废弃掉，因为废弃掉了以后再访问这个 URL 可能就直接返回 404 说资源不存在了，正常来讲">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redirect">
+<meta property="og:url" content="http://example.com/2021/03/10/HTTP010-Redirect/index.html">
+<meta property="og:site_name" content="Keeppassion">
+<meta property="og:description" content="我们通过 URL 请求一个资源的时候，如果发现这个资源已经不在这个 URL 指定的位置了，这个时候服务器要告诉客户端请求的资源现在在哪里，然后客户端再去请求那个地址，最后客户端才能拿到资源。 在开发服务器的时候，如果之前指定了某个资源在某个地方，如果后来把资源搬到了别的地方，不应该立即把原来的 URL 立即废弃掉，因为废弃掉了以后再访问这个 URL 可能就直接返回 404 说资源不存在了，正常来讲">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/03/10/HTTP010-Redirect/1.png">
+<meta property="article:published_time" content="2021-03-10T06:51:25.000Z">
+<meta property="article:modified_time" content="2021-03-11T06:52:06.465Z">
+<meta property="article:author" content="Li Yanran">
+<meta property="article:tag" content="HTTP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/10/HTTP010-Redirect/1.png">
+    
+
+    
+        <link rel="alternate" href="/" title="Keeppassion" type="application/atom+xml" />
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    uncategorized
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-HTTP010-Redirect" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Redirect
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/03/10/HTTP010-Redirect/" class="article-date">
+       <time datetime="2021-03-10T06:51:25.000Z" itemprop="datePublished">2021-03-10</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2021/03/10/HTTP010-Redirect/" class="article-date">
+     <time datetime="2021-03-11T06:52:06.465Z" itemprop="dateModified">2021-03-11</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/HTTP/" rel="tag">HTTP</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>我们通过 URL 请求一个资源的时候，如果发现这个资源已经不在这个 URL 指定的位置了，这个时候服务器要告诉客户端请求的资源现在在哪里，然后客户端再去请求那个地址，最后客户端才能拿到资源。</p>
+<p>在开发服务器的时候，如果之前指定了某个资源在某个地方，如果后来把资源搬到了别的地方，不应该立即把原来的 URL 立即废弃掉，因为废弃掉了以后再访问这个 URL 可能就直接返回 404 说资源不存在了，正常来讲，服务器应该要告诉客户端需要去哪个新地址找到它所需的资源。这就是重定向。</p>
+<p>URL 重定向，也可以称为 URL 转发。是一种当实际资源，如单个页面、表单或者整个 Web 应用被迁移到新的 URL 下的时候，保持（原有）链接可用的技术。HTTP 协议提供了一种特殊形式的响应—— HTTP 重定向（HTTP redirects）来执行此类操作。</p>
+<p>浏览器在接收到重定向响应的时候，会采用该响应提供的新的 URL ，并立即进行加载；大多数情况下，除了会有一小部分性能损失之外，重定向操作对于用户来说是不可见的。</p>
+<img src="/2021/03/10/HTTP010-Redirect/1.png" width="80%">
+
+<p>HTTP 协议的重定向响应的状态码为 3xx 。不同类型的重定向映射可以划分为三个类别：永久重定向、临时重定向、特殊重定向。</p>
+<h5 id="永久重定向："><a href="#永久重定向：" class="headerlink" title="永久重定向："></a>永久重定向：</h5><p>这种重定向操作是永久性的。它表示原 URL 不应再被使用，而应该优先选用新的 URL。搜索引擎机器人会在遇到该状态码时触发更新操作，在其索引库中修改与该资源相关的 URL 。</p>
+<img src="/2021/03/10/HTTP010-Redirect/2.png" width="80%">
+
+<p>[1] 该规范无意使方法发生改变，但在实际应用中用户代理会这么做。 308 状态码被创建用来消除在使用非 GET 方法时的歧义行为。</p>
+<h5 id="临时重定向："><a href="#临时重定向：" class="headerlink" title="临时重定向："></a>临时重定向：</h5><p>有时候请求的资源无法从其标准地址访问，但是却可以从另外的地方访问。在这种情况下可以使用临时重定向。搜索引擎不会记录该新的、临时的链接。在创建、更新或者删除资源的时候，临时重定向也可以用于显示临时性的进度页面。</p>
+<img src="/2021/03/10/HTTP010-Redirect/3.png" width="80%">
+
+<p>[2] 该规范无意使方法发生改变，但在实际应用中用户代理会这么做。 307 状态码被创建用来消除在使用非 GET 方法时的歧义行为。</p>
+<h5 id="特殊重定向："><a href="#特殊重定向：" class="headerlink" title="特殊重定向："></a>特殊重定向：</h5><p>除了上述两种常见的重定向之外，还有两种特殊的重定向。304（Not Modified，资源未被修改）会使页面跳转到本地陈旧的缓存版本当中，而 300（Multiple Choice，多项选择） 则是一种手工重定向：以 Web 页面形式呈现在浏览器中的消息主体包含了一个可能的重定向链接的列表，用户可以从中进行选择。</p>
+<img src="/2021/03/10/HTTP010-Redirect/4.png" width="80%">
+
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2021/03/10/HTTP010-Redirect/" data-id="ckm4tdyii001k91ug17hletbn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Li Yanran"
+        },
+        "headline": "Redirect",
+        "image": "http://example.com/2021/03/10/HTTP010-Redirect/1.png",
+        "keywords": "HTTP",
+        "genre": "",
+        "datePublished": "2021-03-10",
+        "dateCreated": "2021-03-10",
+        "dateModified": "2021-03-11",
+        "url": "http://example.com/2021/03/10/HTTP010-Redirect/",
+        "description": "我们通过 URL 请求一个资源的时候，如果发现这个资源已经不在这个 URL 指定的位置了，这个时候服务器要告诉客户端请求的资源现在在哪里，然后客户端再去请求那个地址，最后客户端才能拿到资源。
+在开发服务器的时候，如果之前指定了某个资源在某个地方，如果后来把资源搬到了别的地方，不应该立即把原来的 URL 立即废弃掉，因为废弃掉了以后再访问这个 URL 可能就直接返回 404 说资源不存在了，正常来讲",
+        "wordCount": 68
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="stack-overflow" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-stack-overflow"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ppoffice/hexo-theme-hueman" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2021/03/11/Vue001/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            【Vue】自定义组件的v-model
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2021/03/05/HTTP008/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">数据协商</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/03/11/Vue001/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/03/11/Vue001/1.jpg)" alt="【Vue】自定义组件的v-model" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/03/11/Vue001/" class="title">【Vue】自定义组件的v-model</a></p>
+                            <p class="item-date"><time datetime="2021-03-11T05:30:12.000Z" itemprop="datePublished">2021-03-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/03/10/HTTP010-Redirect/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/03/10/HTTP010-Redirect/1.png)" alt="Redirect" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/03/10/HTTP010-Redirect/" class="title">Redirect</a></p>
+                            <p class="item-date"><time datetime="2021-03-10T06:51:25.000Z" itemprop="datePublished">2021-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/03/05/HTTP008/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/03/05/HTTP008/1.jpeg)" alt="数据协商" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/03/05/HTTP008/" class="title">数据协商</a></p>
+                            <p class="item-date"><time datetime="2021-03-05T05:42:12.000Z" itemprop="datePublished">2021-03-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/03/05/HTTP009/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/03/05/HTTP009/1.png)" alt="Cookie与Session" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/03/05/HTTP009/" class="title">Cookie与Session</a></p>
+                            <p class="item-date"><time datetime="2021-03-05T05:42:12.000Z" itemprop="datePublished">2021-03-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/03/04/HTTP007/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/03/04/HTTP007/1.jpeg)" alt="HTTP长连接" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/03/04/HTTP007/" class="title">HTTP长连接</a></p>
+                            <p class="item-date"><time datetime="2021-03-04T05:42:12.000Z" itemprop="datePublished">2021-03-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">24</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="">暂无</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Li Yanran</p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://example.com/2021/03/10/HTTP010-Redirect/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
