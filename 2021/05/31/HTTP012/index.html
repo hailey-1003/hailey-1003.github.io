@@ -6,26 +6,26 @@
     
 
     
-    <title>（四）ES5、ES6：数组的扩展 | Keeppassion</title>
+    <title>常见 Web 攻击总结 | Keeppassion</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="ES" />
+    <meta name="keywords" content="HTTP" />
     
-    <meta name="description" content="1. 类数组&#x2F;伪数组使用document.getElementsByTagName()与document.getElementsByClassName()返回的是 HTMLCollection 对象，document.querySelectorAll()返回的是 NodeList 对象。HTMLCollection 对象与 NodeList 对象 就是类数组&#x2F;伪数组。它们像数组一样具有 lengt">
+    <meta name="description" content="http:&#x2F;&#x2F;keeppassion.me&#x2F;2021&#x2F;02&#x2F;04&#x2F;HTTP004&#x2F; 在上述博客中，已经讲解了同源政策与 JSONP，这边博客我们将对 JSONP 的代码进行优化，并封装成函数。 一、动态发送请求我们先看一下之前的代码： 12345678&lt;script&gt;  function fn (data) &amp;#123;    console.log(&amp;#x27;客户端的fn函数被调用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="（四）ES5、ES6：数组的扩展">
-<meta property="og:url" content="http://example.com/2021/02/16/ES004/index.html">
+<meta property="og:title" content="常见 Web 攻击总结">
+<meta property="og:url" content="http://example.com/2021/05/31/HTTP012/index.html">
 <meta property="og:site_name" content="Keeppassion">
-<meta property="og:description" content="1. 类数组&#x2F;伪数组使用document.getElementsByTagName()与document.getElementsByClassName()返回的是 HTMLCollection 对象，document.querySelectorAll()返回的是 NodeList 对象。HTMLCollection 对象与 NodeList 对象 就是类数组&#x2F;伪数组。它们像数组一样具有 lengt">
+<meta property="og:description" content="http:&#x2F;&#x2F;keeppassion.me&#x2F;2021&#x2F;02&#x2F;04&#x2F;HTTP004&#x2F; 在上述博客中，已经讲解了同源政策与 JSONP，这边博客我们将对 JSONP 的代码进行优化，并封装成函数。 一、动态发送请求我们先看一下之前的代码： 12345678&lt;script&gt;  function fn (data) &amp;#123;    console.log(&amp;#x27;客户端的fn函数被调用">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/02/16/ES004/1.png">
-<meta property="article:published_time" content="2021-02-16T10:25:36.000Z">
-<meta property="article:modified_time" content="2021-02-16T10:23:46.275Z">
+<meta property="og:image" content="http://example.com/2021/05/31/HTTP012/1.png">
+<meta property="article:published_time" content="2021-05-31T08:11:49.000Z">
+<meta property="article:modified_time" content="2021-05-31T08:11:34.859Z">
 <meta property="article:author" content="Li Yanran">
-<meta property="article:tag" content="ES">
+<meta property="article:tag" content="HTTP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/02/16/ES004/1.png">
+<meta name="twitter:image" content="http://example.com/2021/05/31/HTTP012/1.png">
     
 
     
@@ -151,14 +151,14 @@
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-ES004" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-HTTP012" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        （四）ES5、ES6：数组的扩展
+        常见 Web 攻击总结
         </h1>
     
 
@@ -169,16 +169,16 @@
                 
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2021/02/16/ES004/" class="article-date">
-       <time datetime="2021-02-16T10:25:36.000Z" itemprop="datePublished">2021-02-16</time>
+    <a href="/2021/05/31/HTTP012/" class="article-date">
+       <time datetime="2021-05-31T08:11:49.000Z" itemprop="datePublished">2021-05-31</time>
     </a>
   </div>
 
 
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
-  <a href="/2021/02/16/ES004/" class="article-date">
-     <time datetime="2021-02-16T10:23:46.275Z" itemprop="dateModified">2021-02-16</time>
+  <a href="/2021/05/31/HTTP012/" class="article-date">
+     <time datetime="2021-05-31T08:11:34.859Z" itemprop="dateModified">2021-05-31</time>
   </a>
 </div>
 
@@ -188,7 +188,7 @@
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/ES/" rel="tag">ES</a>
+        <a class="tag-link-link" href="/tags/HTTP/" rel="tag">HTTP</a>
     </div>
 
                 
@@ -205,30 +205,42 @@
 
             
 
-            <h3 id="1-类数组-伪数组"><a href="#1-类数组-伪数组" class="headerlink" title="1. 类数组/伪数组"></a>1. 类数组/伪数组</h3><p>使用<code>document.getElementsByTagName()</code>与<code>document.getElementsByClassName()</code>返回的是 <strong>HTMLCollection</strong> 对象，<code>document.querySelectorAll()</code>返回的是 <strong>NodeList</strong> 对象。HTMLCollection 对象与 NodeList 对象 就是类数组/伪数组。它们像数组一样具有 length 属性，但并不是真正的数组，不具有数组的方法。常见的伪数组还有函数的参数对象 arguments。</p>
-<h4 id="将伪数组转换为数组的方法："><a href="#将伪数组转换为数组的方法：" class="headerlink" title="将伪数组转换为数组的方法："></a>将伪数组转换为数组的方法：</h4><h5 id="1）ES5-：-slice"><a href="#1）ES5-：-slice" class="headerlink" title="1）ES5 ： slice()"></a>1）ES5 ： <code>slice()</code></h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> arr = <span class="built_in">Array</span>.prototype.slice.call(div)</span><br><span class="line"><span class="built_in">console</span>.log(arr <span class="keyword">instanceof</span> <span class="built_in">Array</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h5 id="2）ES6：-Array-from"><a href="#2）ES6：-Array-from" class="headerlink" title="2）ES6： Array.from()"></a>2）ES6： <code>Array.from()</code></h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我们首先自己定义一个为数组</span></span><br><span class="line"><span class="keyword">let</span> arrayLike = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">&#x27;es6&#x27;</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">&#x27;es7&#x27;</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">&#x27;es8&#x27;</span>,</span><br><span class="line">  length: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> arr = <span class="built_in">Array</span>.from(arrayLike)</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br></pre></td></tr></table></figure>
-<p>返回值如下：</p>
-<img src="/2021/02/16/ES004/1.png" width="40%">
-
-<h3 id="2-构造数组"><a href="#2-构造数组" class="headerlink" title="2. 构造数组"></a>2. 构造数组</h3><p>首先回顾一下 ES5 中构造数组的方法，我们知道可以使用字面量的方式与 new Array 的方式来创建数组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// 创建一个值为[1,2]的数组</span></span><br><span class="line"><span class="keyword">let</span> arr2 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>) <span class="comment">// 创建一个长度为3的空数组</span></span><br></pre></td></tr></table></figure>
-<p>使用 new 方法时，如果只传入一个参数，那么那个参数就是数组的长度。有什么办法可以创建值为 [3] 的数组吗？我们可以使用 ES6 中的<code>Array.of()</code>方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = <span class="built_in">Array</span>.of(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// 创建一个值为[1,2]的数组</span></span><br><span class="line"><span class="keyword">let</span> arr = <span class="built_in">Array</span>.of(<span class="number">3</span>) <span class="comment">// 创建一个值为[3]的数组</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-ES6-中替换数组元素"><a href="#3-ES6-中替换数组元素" class="headerlink" title="3. ES6 中替换数组元素"></a>3. ES6 中替换数组元素</h3><p>使用<code>copyWithin()</code>方法替换数组元素。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr.copyWithin(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>)) <span class="comment">// [1, 4, 5, 4, 5]</span></span><br><span class="line"><span class="comment">// 第一个参数为被替换元素的起始下标，第二个参数为替代部分的起始下标，（可省略）第三个参数为替代部分的结束下标+1</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-ES6-中填充数组"><a href="#4-ES6-中填充数组" class="headerlink" title="4. ES6 中填充数组"></a>4. ES6 中填充数组</h3><p>使用<code>fill()</code>方法填充数组。具体用法如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>).fill(<span class="number">6</span>)</span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// [6, 6, 6]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">arr.fill(<span class="string">&#x27;apple&#x27;</span>, <span class="number">1</span>, <span class="number">3</span>) <span class="comment">// (替换的内容,被替换的起始坐标，被替换的结束坐标+1)，第二个与第三个参数可省略</span></span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// [1, &quot;apple&quot;, &quot;apple&quot;, 4, 5]</span></span><br></pre></td></tr></table></figure>
-<h3 id="5-检测数组中是否包含目标元素"><a href="#5-检测数组中是否包含目标元素" class="headerlink" title="5. 检测数组中是否包含目标元素"></a>5. 检测数组中是否包含目标元素</h3><p>在 ES5 中，使用<code>IndexOf()</code>方法进行检测，若目标元素存在，则返回对应下标，否则返回 -1。在 ES6 中，使用<code>includes()</code>方法进行检测，若目标元素存在则返回 true，否者返回 false。但是还有一点值得注意的是，这两个方法检测 NaN 的结果不同。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="literal">NaN</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr.indexOf(<span class="literal">NaN</span>)) <span class="comment">// 返回-1，此方法无法检测NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.includes(<span class="literal">NaN</span>)) <span class="comment">// 返回true，此方法可以检测NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意：</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">NaN</span> === <span class="literal">NaN</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
+            <p><a target="_blank" rel="noopener" href="http://keeppassion.me/2021/02/04/HTTP004/">http://keeppassion.me/2021/02/04/HTTP004/</a></p>
+<p>在上述博客中，已经讲解了同源政策与 JSONP，这边博客我们将对 JSONP 的代码进行优化，并封装成函数。</p>
+<h2 id="一、动态发送请求"><a href="#一、动态发送请求" class="headerlink" title="一、动态发送请求"></a>一、动态发送请求</h2><p>我们先看一下之前的代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">&#x27;客户端的fn函数被调用了&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(data);</span></span><br><span class="line">  &#125;    </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 1.将非同源服务器端的请求地址写在script标签的src属性中 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://localhost:3001/test&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们可以看出，请求在访问页面的时候就被立刻发送了。但是我们可能并不像请求立刻被发送，而是想发送时再发送，例如点击一个按钮时再发送，实现动态发送。</p>
+<h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><ol>
+<li>点击按钮后动态创建 script 标签，并设置 src 属性；</li>
+<li>将 script 标签追加只页面中，<strong>请求是在 script 标签追加至页面之后发送的</strong>；</li>
+<li>在 script 标签加载完毕后，将 script 标签标签移除。（避免点击一次就追加一个 script 标签，最后放进去了很多 script 标签，这样并不好）</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>点我发送请求<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">&#x27;客户端的fn函数被调用了&#x27;</span>)</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(data);</span></span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn&#x27;</span>);</span></span><br><span class="line"><span class="javascript">    btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span></span><br><span class="line"><span class="javascript">      script.src = <span class="string">&#x27;http://localhost:3001/test&#x27;</span>;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.body.appendChild(script);</span></span><br><span class="line"><span class="javascript">      script.onload = <span class="function">()=&gt;</span>&#123;<span class="built_in">document</span>.body.removeChild(script)&#125;;</span></span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、函数名称问题"><a href="#二、函数名称问题" class="headerlink" title="二、函数名称问题"></a>二、函数名称问题</h2><p>上面我们只定义了一个函数 fn，但实际上会定义多个函数用于接收数据、处理数据。因此需要告知服务器端返回哪个函数的调用，故将函数名称作为参数传递过去。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script.src = <span class="string">&#x27;http://localhost:3001/test?callback=fn&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="三、封装-jsonp-函数"><a href="#三、封装-jsonp-函数" class="headerlink" title="三、封装 jsonp 函数"></a>三、封装 jsonp 函数</h2><p>现在我们对 jsonp 进行封装。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">  script.src = options.url;</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">  script.onload = <span class="function">()=&gt;</span>&#123;<span class="built_in">document</span>.body.removeChild(script)&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再调用一下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn&#x27;</span>);</span><br><span class="line">btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  jsonp(&#123; <span class="attr">url</span>: <span class="string">&#x27;http://localhost:3001/test?callback=fn&#x27;</span> &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="四、优化-jsonp-函数"><a href="#四、优化-jsonp-函数" class="headerlink" title="四、优化 jsonp 函数"></a>四、优化 jsonp 函数</h2><p>我们上面的做法存在3个问题：</p>
+<ul>
+<li>问题1：我们定义了 jsonp 函数用于发送请求，然后还需要 fn 函数来接收数据、处理数据，以至于发送一个请求需要使用两个函数。而且两个函数是独立的，破坏了封装性。因此我们希望将接收数据的函数写进 jsonp 函数的实参里，作为回调函数使用。</li>
+<li>问题2：我们可能需要发送多个请求，每个请求都需要一个回调函数来处理服务器响应的结果，取名字也是一件头疼的事情。因此我们可以让函数的名字随机产生。</li>
+<li>问题3：我们希望 jsonp 函数能够传递参数。</li>
+</ul>
+<p>改进后的 jsonp 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 问题3解决方案：拼接参数字符串，后面将params拼接到url后面</span></span><br><span class="line">  <span class="keyword">let</span> params = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> options.data) &#123;</span><br><span class="line">    params += <span class="string">`&amp;<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;options.data[key]&#125;</span>`</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 问题2解决方案：随机生成函数名，函数名不能是纯数字，所以在前面加了个myJsonp</span></span><br><span class="line">  <span class="keyword">let</span> fnName = <span class="string">&#x27;myJsonp&#x27;</span> + <span class="built_in">Math</span>.random().toString().replace(<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 问题1解决方案：给window添加属性，这样虽然全局作用域下没有这个函数，但是window对象下有这个属性</span></span><br><span class="line">  <span class="built_in">window</span>[fnName] = options.success;</span><br><span class="line"></span><br><span class="line">  script.src = options.url + <span class="string">&#x27;?callback=&#x27;</span> + fnName + params;</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">  script.onload = <span class="function">()=&gt;</span>&#123;<span class="built_in">document</span>.body.removeChild(script)&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们访问腾讯天气测试一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn&#x27;</span>);</span><br><span class="line">btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  jsonp(&#123; </span><br><span class="line">    url: <span class="string">&#x27;https://wis.qq.com/weather/common&#x27;</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      source: <span class="string">&#x27;pc&#x27;</span>,</span><br><span class="line">      weather_type: <span class="string">&#x27;forecast_24h&#x27;</span>,</span><br><span class="line">      province: <span class="string">&#x27;陕西省&#x27;</span>,</span><br><span class="line">      city: <span class="string">&#x27;西安市&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">success</span>(<span class="params">data</span>)</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(data.data);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>可以成功获取天气数据：</p>
+<img src="/2021/05/31/HTTP012/1.png">
         </div>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="http://example.com/2021/02/16/ES004/" data-id="ckpcc2wtd000iaougddct3bt7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://example.com/2021/05/31/HTTP012/" data-id="ckpcc2wty002eaougb6a9eyeq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -298,16 +310,19 @@
             "@type": "Person",
             "name": "Li Yanran"
         },
-        "headline": "（四）ES5、ES6：数组的扩展",
-        "image": "http://example.com/2021/02/16/ES004/1.png",
-        "keywords": "ES",
+        "headline": "常见 Web 攻击总结",
+        "image": "http://example.com/2021/05/31/HTTP012/1.png",
+        "keywords": "HTTP",
         "genre": "",
-        "datePublished": "2021-02-16",
-        "dateCreated": "2021-02-16",
-        "dateModified": "2021-02-16",
-        "url": "http://example.com/2021/02/16/ES004/",
-        "description": "1. 类数组/伪数组使用document.getElementsByTagName()与document.getElementsByClassName()返回的是 HTMLCollection 对象，document.querySelectorAll()返回的是 NodeList 对象。HTMLCollection 对象与 NodeList 对象 就是类数组/伪数组。它们像数组一样具有 lengt",
-        "wordCount": 369
+        "datePublished": "2021-05-31",
+        "dateCreated": "2021-05-31",
+        "dateModified": "2021-05-31",
+        "url": "http://example.com/2021/05/31/HTTP012/",
+        "description": "http://keeppassion.me/2021/02/04/HTTP004/
+在上述博客中，已经讲解了同源政策与 JSONP，这边博客我们将对 JSONP 的代码进行优化，并封装成函数。
+一、动态发送请求我们先看一下之前的代码：
+12345678&lt;script&gt;  function fn (data) &#123;    console.log(&#x27;客户端的fn函数被调用",
+        "wordCount": 628
     }
 </script>
 
@@ -388,20 +403,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2021/02/17/ES005/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            （五）ES6：函数参数的新特性
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2021/02/16/ES003/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2021/05/26/HTTP011/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">（三）ES5、ES6：数组的遍历方式</p>
+        <p class="article-nav-title">常见 Web 攻击总结</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -609,7 +614,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://example.com/2021/02/16/ES004/';
+    var disqus_url = 'http://example.com/2021/05/31/HTTP012/';
     
     (function() {
     var dsq = document.createElement('script');
