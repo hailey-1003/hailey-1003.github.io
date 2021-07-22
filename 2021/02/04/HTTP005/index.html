@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/02/04/HTTP005/001.jpeg">
 <meta property="article:published_time" content="2021-02-04T08:25:36.000Z">
-<meta property="article:modified_time" content="2021-02-04T14:35:47.932Z">
+<meta property="article:modified_time" content="2021-07-17T08:00:16.530Z">
 <meta property="article:author" content="Li Yanran">
 <meta property="article:tag" content="HTTP">
 <meta name="twitter:card" content="summary">
@@ -178,7 +178,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/02/04/HTTP005/" class="article-date">
-     <time datetime="2021-02-04T14:35:47.932Z" itemprop="dateModified">2021-02-04</time>
+     <time datetime="2021-07-17T08:00:16.530Z" itemprop="dateModified">2021-07-17</time>
   </a>
 </div>
 
@@ -212,7 +212,7 @@
 <p>我们可以在服务器端增加以下代码（node.js）：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">response.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">  <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>: <span class="string">&#x27;*&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>注意：不论是否有这个，浏览器都会向服务器发送请求，因为浏览器并不知道这个请求是不是跨域请求。并且浏览器会接收服务器返回的内容，只不过浏览器在接收到数据返回的时候，会发现里面没有 Access-Control-Allow-Origin 并且设置为允许。那么浏览器会把请求返回的内容忽略掉，并且在命令行里报错。</p>
-<p>也就是说，<strong>请求已经发送了，内容也返回了，只不过浏览器在解析了返回的内容以后，发现这是不允许的，所以拦截了。</strong>这是浏览器提供的功能。例如我们使用 curl 发送请求，它是没有跨域的概念的，任何的请求都是可以发出并且拿到返回的内容。</p>
+<p>也就是说，<strong>请求已经发送了，内容也返回了，只不过浏览器在解析了返回的内容以后，发现这是不允许的，所以拦截了。</strong>这是浏览器提供的功能。例如我们使用 url 发送请求，它是没有跨域的概念的，任何的请求都是可以发出并且拿到返回的内容。</p>
 <h2 id="二、CORS预请求"><a href="#二、CORS预请求" class="headerlink" title="二、CORS预请求"></a>二、CORS预请求</h2><p>在发送 CORS 请求时，浏览器检测到跨域请求，会自动发出一个 OPTIONS 请求来检验本次请求是否被服务器接受。服务器接收到该预请求之后，就会返回与 CORS 相关的响应头。服务器通过了 CORS 跨域请求后，客户端才会发送正式的数据。</p>
 <p>所以整个请求过程其实是发生了两次请求：预请求、实际数据请求。可以参考下图：</p>
 <img src="/2021/02/04/HTTP005/001.jpeg">
@@ -256,7 +256,7 @@
 
 
 
-    <a data-url="http://example.com/2021/02/04/HTTP005/" data-id="ckr5q3cyi0021psuggki918eb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://example.com/2021/02/04/HTTP005/" data-id="ckrezw81n00216xuggi2cbiax" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -332,7 +332,7 @@
         "genre": "",
         "datePublished": "2021-02-04",
         "dateCreated": "2021-02-04",
-        "dateModified": "2021-02-04",
+        "dateModified": "2021-07-17",
         "url": "http://example.com/2021/02/04/HTTP005/",
         "description": "一、CORS 跨域资源共享CORS 全称为 Cross-origin resourse sharing，即跨域资源共享，它允许浏览器向跨域服务器发送 Ajax 请求，克服了 Ajax 只能同源使用的限制。
 JSONP 是绕过了同源限制，发送的也不是 Ajax 请求；CORS 直接允许浏览器向跨域的服务器发生 Ajax 请求。
@@ -453,6 +453,26 @@ CORS 简单来说就是，服务器允许你跨域访问它，客户端就可以
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2021/07/18/HTTP014/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/07/18/HTTP014/1.png)" alt="浏览器中的进程" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/07/18/HTTP014/" class="title">浏览器中的进程</a></p>
+                            <p class="item-date"><time datetime="2021-07-18T14:10:23.000Z" itemprop="datePublished">2021-07-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2021/06/26/HTTP013/" class="thumbnail">
     
     
@@ -530,26 +550,6 @@ CORS 简单来说就是，服务器允许你跨域访问它，客户端就可以
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2021/04/10/Vue006/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2021/04/10/Vue006/1.jpeg)" alt="【Vue3.x】ref、toRef、toRefs" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2021/04/10/Vue006/" class="title">【Vue3.x】ref、toRef、toRefs</a></p>
-                            <p class="item-date"><time datetime="2021-04-10T05:51:13.000Z" itemprop="datePublished">2021-04-10</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -562,7 +562,7 @@ CORS 简单来说就是，服务器允许你跨域访问它，客户端就可以
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">23</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">23</span></li></ul>
         </div>
     </div>
 
@@ -572,7 +572,7 @@ CORS 简单来说就是，服务器允许你跨域访问它，客户端就可以
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">7</span></li></ul>
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -582,7 +582,7 @@ CORS 简单来说就是，服务器允许你跨域访问它，客户端就可以
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a>
+            <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;">综合</a>
         </div>
     </div>
 

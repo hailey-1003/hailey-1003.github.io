@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/05/31/HTTP012/1.png">
 <meta property="article:published_time" content="2021-05-31T08:11:49.000Z">
-<meta property="article:modified_time" content="2021-05-31T08:13:54.249Z">
+<meta property="article:modified_time" content="2021-07-17T06:37:38.055Z">
 <meta property="article:author" content="Li Yanran">
 <meta property="article:tag" content="HTTP">
 <meta name="twitter:card" content="summary">
@@ -178,7 +178,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/05/31/HTTP012/" class="article-date">
-     <time datetime="2021-05-31T08:13:54.249Z" itemprop="dateModified">2021-05-31</time>
+     <time datetime="2021-07-17T06:37:38.055Z" itemprop="dateModified">2021-07-17</time>
   </a>
 </div>
 
@@ -209,10 +209,10 @@
 <p>在上述博客中，已经讲解了同源政策与 JSONP，这边博客我们将对 JSONP 的代码进行优化，并封装成函数。</p>
 <h2 id="一、动态发送请求"><a href="#一、动态发送请求" class="headerlink" title="一、动态发送请求"></a>一、动态发送请求</h2><p>我们先看一下之前的代码：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">&#x27;客户端的fn函数被调用了&#x27;</span>)</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(data);</span></span><br><span class="line">  &#125;    </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 1.将非同源服务器端的请求地址写在script标签的src属性中 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://localhost:3001/test&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>我们可以看出，请求在访问页面的时候就被立刻发送了。但是我们可能并不像请求立刻被发送，而是想发送时再发送，例如点击一个按钮时再发送，实现动态发送。</p>
+<p>我们可以看出，请求在访问页面的时候就被立刻发送了。但是我们可能并不想请求立刻被发送，而是想发送时再发送，例如点击一个按钮时再发送，实现动态发送。</p>
 <h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><ol>
 <li>点击按钮后动态创建 script 标签，并设置 src 属性；</li>
-<li>将 script 标签追加只页面中，<strong>请求是在 script 标签追加至页面之后发送的</strong>；</li>
+<li>将 script 标签追加到页面中，<strong>请求是在 script 标签追加至页面之后发送的</strong>；</li>
 <li>在 script 标签加载完毕后，将 script 标签标签移除。（避免点击一次就追加一个 script 标签，最后放进去了很多 script 标签，这样并不好）</li>
 </ol>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>点我发送请求<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">&#x27;客户端的fn函数被调用了&#x27;</span>)</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(data);</span></span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn&#x27;</span>);</span></span><br><span class="line"><span class="javascript">    btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span></span><br><span class="line"><span class="javascript">      script.src = <span class="string">&#x27;http://localhost:3001/test&#x27;</span>;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.body.appendChild(script);</span></span><br><span class="line"><span class="javascript">      script.onload = <span class="function">()=&gt;</span>&#123;<span class="built_in">document</span>.body.removeChild(script)&#125;;</span></span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -240,7 +240,7 @@
 
 
 
-    <a data-url="http://example.com/2021/05/31/HTTP012/" data-id="ckr5q3cym002fpsugb2m6ex3p" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://example.com/2021/05/31/HTTP012/" data-id="ckrezw81s002f6xugg03ubzns" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -316,7 +316,7 @@
         "genre": "",
         "datePublished": "2021-05-31",
         "dateCreated": "2021-05-31",
-        "dateModified": "2021-05-31",
+        "dateModified": "2021-07-17",
         "url": "http://example.com/2021/05/31/HTTP012/",
         "description": "http://keeppassion.me/2021/02/04/HTTP004/
 在上述博客中，已经讲解了同源政策与 JSONP，这边博客我们将对 JSONP 的代码进行优化，并封装成函数。
@@ -438,6 +438,26 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2021/07/18/HTTP014/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2021/07/18/HTTP014/1.png)" alt="浏览器中的进程" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2021/07/18/HTTP014/" class="title">浏览器中的进程</a></p>
+                            <p class="item-date"><time datetime="2021-07-18T14:10:23.000Z" itemprop="datePublished">2021-07-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2021/06/26/HTTP013/" class="thumbnail">
     
     
@@ -515,26 +535,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2021/04/10/Vue006/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/2021/04/10/Vue006/1.jpeg)" alt="【Vue3.x】ref、toRef、toRefs" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2021/04/10/Vue006/" class="title">【Vue3.x】ref、toRef、toRefs</a></p>
-                            <p class="item-date"><time datetime="2021-04-10T05:51:13.000Z" itemprop="datePublished">2021-04-10</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -547,7 +547,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">23</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">23</span></li></ul>
         </div>
     </div>
 
@@ -557,7 +557,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">7</span></li></ul>
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -567,7 +567,7 @@
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a>
+            <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;">综合</a>
         </div>
     </div>
 
