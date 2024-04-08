@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-ES016" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/24/ES016/" class="article-date">
+  <time class="dt-published" datetime="2021-02-24T05:42:12.000Z" itemprop="datePublished">2021-02-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/24/ES016/">（十六）ES6：Number与Math的扩展</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、ES6-中表示二进制与八进制"><a href="#一、ES6-中表示二进制与八进制" class="headerlink" title="一、ES6 中表示二进制与八进制"></a>一、ES6 中表示二进制与八进制</h2><p>ES5 中二进制与十进制互相转换：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 十进制 -&gt; 二进制</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="number">5</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a.<span class="title function_">toString</span>(<span class="number">2</span>)) <span class="comment">// 101</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 二进制 -&gt; 十进制</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">101</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseInt</span>(b, <span class="number">2</span>)) <span class="comment">//5</span></span><br></pre></td></tr></table></figure>
+
+<p>ES6 中使用<code>0B</code>表示二进制，<code>0O</code>表示八进制。（B和O大小写均可）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">0B101</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a) <span class="comment">//5</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">0O10</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b) <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+
+<p>严格模式中不允许使用0为前缀表示数值，这样会报错：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">0101</span> <span class="comment">// 报错，严格模式下不允许使用旧的八进制文字</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">0B0101</span> <span class="comment">// 0o和0b后跟0没关系，不会报错</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、ES6-中提供的新方法"><a href="#二、ES6-中提供的新方法" class="headerlink" title="二、ES6 中提供的新方法"></a>二、ES6 中提供的新方法</h2><h4 id="1）Number-isFinite"><a href="#1）Number-isFinite" class="headerlink" title="1）Number.isFinite()"></a>1）Number.isFinite()</h4><p>判断当前数值是否是有限的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(<span class="number">5</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(<span class="title class_">Infinity</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(<span class="string">&#x27;imooc&#x27;</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(<span class="literal">true</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>补充：ES 中一个数除以 0 不会报错，输出结果是无穷大。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">5</span>/<span class="number">0</span>) <span class="comment">// Infinity</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2）Number-isNaN"><a href="#2）Number-isNaN" class="headerlink" title="2）Number.isNaN()"></a>2）Number.isNaN()</h4><p>判断当前参数是否是 NaN。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isNaN</span>(<span class="title class_">NaN</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isNaN</span>(<span class="number">15</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>在 ES5 中，有一个方法为<code>isNaN()</code>，这个方法相当于 window.isNaN()。<strong>ES5 中将很多方法都挂载在了全局对象 window 上，导致全局对象很大。在 ES6 中逐步地将一些全局方法迁移到了相应的对象上。这样可以使全局对象变小且语言更加模块化。</strong></p>
+<h4 id="3）Number-parseInt-与-Number-parseFloat"><a href="#3）Number-parseInt-与-Number-parseFloat" class="headerlink" title="3）Number.parseInt() 与 Number.parseFloat()"></a>3）Number.parseInt() 与 Number.parseFloat()</h4><p>这两个方法也是从全局对象迁移到 Number 对象上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">parseInt</span>(<span class="number">5.5</span>)) <span class="comment">// 5</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">parseFloat</span>(<span class="number">5.5</span>)) <span class="comment">// 5.5</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4）Number-isInteger"><a href="#4）Number-isInteger" class="headerlink" title="4）Number.isInteger()"></a>4）Number.isInteger()</h4><p>判断当前数值是否为整数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isInteger</span>(<span class="number">5</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isInteger</span>(<span class="number">5.5</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5）Number-isSafeInteger"><a href="#5）Number-isSafeInteger" class="headerlink" title="5）Number.isSafeInteger()"></a>5）Number.isSafeInteger()</h4><p>用于判断给定参数是否是安全的整数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isSafeInteger</span>(<span class="title class_">Number</span>.<span class="property">MAX_SAFE_INTEGER</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isSafeInteger</span>(<span class="title class_">Number</span>.<span class="property">MAX_SAFE_INTEGER</span> + <span class="number">1</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>ES 中整数的最大值为2的53次方，最小值是负2的53次方。在 ES6 中提供了新的常量表示最大与最小安全整数，<code>Number.MAX_SAFE_INTEGER</code>表示最大的安全整数，<code>Number.MIN_SAFE_INTEGER</code>表示最小的安全整数。注意：Number.MAX_SAFE_INTEGER 等于2的53次方减1，Number.MIN_SAFE_INTEGER 等于负2的53次方加1。</p>
+<h2 id="三、ES6-中关于-Math-对象的新方法"><a href="#三、ES6-中关于-Math-对象的新方法" class="headerlink" title="三、ES6 中关于 Math 对象的新方法"></a>三、ES6 中关于 Math 对象的新方法</h2><h4 id="1）Math-trunc"><a href="#1）Math-trunc" class="headerlink" title="1）Math.trunc()"></a>1）Math.trunc()</h4><p>用于将一个值转化成整数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>(<span class="number">5.5</span>)) <span class="comment">// 5</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>(<span class="title class_">NaN</span>)) <span class="comment">// NaN</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>(<span class="literal">undefined</span>)) <span class="comment">// NaN</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>()) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<p>对于以上参数的转化结果与使用 Number.parseInt() 方法一致，我们再看一下两者的区别：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>(<span class="literal">true</span>)) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>(<span class="literal">false</span>)) <span class="comment">// 0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">parseInt</span>(<span class="literal">true</span>)) <span class="comment">// NaN</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">parseInt</span>(<span class="literal">false</span>)) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2）Math-sign"><a href="#2）Math-sign" class="headerlink" title="2）Math.sign()"></a>2）Math.sign()</h4><p>用于判断参数是正数、负数、还是0。正数返回1，负数返回-1，0返回0。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(<span class="number">5</span>)) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(-<span class="number">5</span>)) <span class="comment">// -1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(<span class="number">0</span>)) <span class="comment">// 0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(<span class="literal">true</span>)) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(<span class="literal">false</span>)) <span class="comment">// 0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(<span class="title class_">NaN</span>)) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3）Math-cbrt"><a href="#3）Math-cbrt" class="headerlink" title="3）Math.cbrt()"></a>3）Math.cbrt()</h4><p>用于计算一个数值的立方根。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">cbrt</span>(<span class="number">8</span>)) <span class="comment">// 2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">cbrt</span>(<span class="string">&#x27;imooc&#x27;</span>)) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+
+
+<img src="1.jpeg">
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/24/ES016/" data-id="clur520qi000tmocc52tpe664" data-title="（十六）ES6：Number与Math的扩展" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ES015" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/23/ES015/" class="article-date">
+  <time class="dt-published" datetime="2021-02-23T15:50:12.000Z" itemprop="datePublished">2021-02-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/23/ES015/">（十五）ES6：正则表达式的扩展</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>ES5 中的修饰符：<code>i</code>用于忽略大小写；<code>m</code>用于多行匹配；<code>g</code>用于全局匹配。</p>
+<p>ES6 提供了2个新的修饰符：<code>y</code>为粘连修饰符；<code>u</code>表示开启unicode模式。</p>
+<p><code>y</code>修饰符与<code>g</code>修饰符非常相似，都表示全局匹配，后一次匹配都是从前一次匹配成功的下一个位置开始。<code>g</code>是剩余的字符串里有要求的子串即可，<code>y</code>是从剩余字符串中的第一位开始匹配。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;aaa_aa_a&#x27;</span></span><br><span class="line"><span class="keyword">const</span> reg1 = <span class="regexp">/a+/g</span></span><br><span class="line"><span class="keyword">const</span> reg2 = <span class="regexp">/a+/y</span> </span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(reg1.<span class="title function_">exec</span>(str)) <span class="comment">// 匹配到 aaa</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(reg2.<span class="title function_">exec</span>(str)) <span class="comment">// 匹配到 aaa</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(reg1.<span class="title function_">exec</span>(str)) <span class="comment">// 匹配到 aa</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(reg2.<span class="title function_">exec</span>(str)) <span class="comment">// null</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(reg1.<span class="title function_">exec</span>(str)) <span class="comment">// 匹配到 a</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(reg2.<span class="title function_">exec</span>(str)) <span class="comment">// 又重头开始找，匹配到 aaa</span></span><br></pre></td></tr></table></figure>
+
+<p>上节说过，ES5 中 unicode 的码点范围是 0000~ffff。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// u修饰符 unicode</span></span><br><span class="line"><span class="comment">// ES5中的范围：\u0000~\uffff</span></span><br><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;\uD842\uDFB7&#x27;</span> <span class="comment">// 表示一个字符</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="regexp">/^\uD842/</span>.<span class="title function_">test</span>(str)) <span class="comment">// es5中返回true，这样是不正常的，需求是匹配 \uD842\uDFB7 这整个字符，但是es5把它 \uD842\uDFB7 当作了两个字符（因为  \uD842\uDFB7 超出了es5的码点范围）。</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="regexp">/^\uD842/u</span>.<span class="title function_">test</span>(str)) <span class="comment">// es6中返回false，加了u修饰符以后可以正确的将 \uD842\uDFB7 识别为一个字符。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .表示除了换行符以外的任意单个字符</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="regexp">/^.$/</span>.<span class="title function_">test</span>(str)) <span class="comment">// false，码点超出范围，es5中无法匹配。</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="regexp">/^.$/u</span>.<span class="title function_">test</span>(str)) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="regexp">/\u&#123;61&#125;/</span>.<span class="title function_">test</span>(<span class="string">&#x27;a&#x27;</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="regexp">/\u&#123;61&#125;/u</span>.<span class="title function_">test</span>(<span class="string">&#x27;a&#x27;</span>)) <span class="comment">// true，想用es6中 \u&#123;...&#125; 这种形式必须加上u修饰符</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="regexp">/𠮷&#123;2&#125;/</span>.<span class="title function_">test</span>(<span class="string">&#x27;𠮷𠮷&#x27;</span>)) <span class="comment">// false，𠮷的码点超出范围，es5中无法正确匹配</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="regexp">/𠮷&#123;2&#125;/u</span>.<span class="title function_">test</span>(<span class="string">&#x27;𠮷𠮷&#x27;</span>)) <span class="comment">// true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<img src="1.jpeg">
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/23/ES015/" data-id="clur520qh000rmocch2of22gh" data-title="（十五）ES6：正则表达式的扩展" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ES014" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/23/ES014/" class="article-date">
+  <time class="dt-published" datetime="2021-02-23T11:40:16.000Z" itemprop="datePublished">2021-02-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/23/ES014/">（十四）ES6：字符串的扩展</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、字符串的-Unicode-表示法"><a href="#一、字符串的-Unicode-表示法" class="headerlink" title="一、字符串的 Unicode 表示法"></a>一、字符串的 Unicode 表示法</h2><p>ES6 中加强了对 Unicode 的支持。</p>
+<p>unidode 使用<code>\uxxxx</code>表示，\u 代表这是 unicode 字符，xxxx 表示 unicode 的码点，码点的取值范围是 0000~ffff。但是有一些的字符超出了码点的取值范围，我们可以使用<code>\u&#123;...&#125;</code>的形式表示，这样码点的取值范围就被扩大了，例如 \u{20BB7}，没有超出码点范围的字符也可以使用这种方式表示，例如 \u{41}。因此在 ES6 中，我们可以统一都用加上大括号的形式来表示字符，这就是 ES6 对 unicode 的一种改进。</p>
+<p>我们还可以使用多种方式表示字符：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;\z&#x27;</span> === <span class="string">&#x27;z&#x27;</span> <span class="comment">// \z并没有特殊含义，因此此时会忽略z前面的\，结果为true</span></span><br><span class="line"><span class="string">&#x27;\172&#x27;</span> === <span class="string">&#x27;z&#x27;</span> <span class="comment">// 严格模式在不支持\HHH会报错，非严格模式下 \HHH 可以表示字符，其中H为八进制数，结果为true</span></span><br><span class="line"><span class="string">&#x27;\x7A&#x27;</span> === <span class="string">&#x27;z&#x27;</span> <span class="comment">// 严格模式在不支持\xHH会报错，非严格模式下 \xHH 可以表示字符，其中H为十六进制数，结果为true</span></span><br><span class="line"><span class="string">&#x27;\u007A&#x27;</span> === <span class="string">&#x27;z&#x27;</span> <span class="comment">// 结果为true</span></span><br><span class="line"><span class="string">&#x27;\u&#123;7A&#125;&#x27;</span> === <span class="string">&#x27;z&#x27;</span> <span class="comment">// ES6中可以这样表示，结果为true</span></span><br></pre></td></tr></table></figure>
+
+<p>unicode 实际用到的情况并不多，我们了解即可。</p>
+<h2 id="二、字符串的遍历器"><a href="#二、字符串的遍历器" class="headerlink" title="二、字符串的遍历器"></a>二、字符串的遍历器</h2><p>使用<code>for of</code>对字符串进行遍历。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> <span class="string">&#x27;hello&#x27;</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、模板字符串"><a href="#三、模板字符串" class="headerlink" title="三、模板字符串"></a>三、模板字符串</h2><p>模板字符串是 ES6 中关于字符串扩展的重点知识，模板字符串的应用场景非常广泛。</p>
+<p>模板字符串中使用反引号 &#96; 代替字符串中的 ‘ 和双引号 “ 。模板字符串让字符串的输入变得更加简单方便，我们可以看一下模板字符串和普通字符串的对比：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str1 = <span class="string">&#x27;床前明月光\n&#x27;</span></span><br><span class="line">  + <span class="string">&#x27;疑是地上霜&#x27;</span></span><br><span class="line"><span class="keyword">const</span> str2 = <span class="string">`床前明月光</span></span><br><span class="line"><span class="string">疑是地上霜`</span></span><br><span class="line"><span class="comment">// 模板字符串可以更简单地输入多行文本</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = <span class="number">20</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">4</span></span><br><span class="line"><span class="keyword">const</span> c = <span class="string">&#x27;ES&#x27;</span></span><br><span class="line"><span class="keyword">const</span> str3 = <span class="string">&#x27;我的年龄是&#x27;</span> + (a + b) + <span class="string">&#x27;,我在学习&#x27;</span> + c</span><br><span class="line"><span class="keyword">const</span> str4 = <span class="string">`我的年龄是<span class="subst">$&#123;a+b&#125;</span>,我在学习<span class="subst">$&#123;c&#125;</span>`</span></span><br><span class="line"><span class="comment">// 模板字符串可以更简单地处理变量</span></span><br></pre></td></tr></table></figure>
+
+<p>模板字符串中可以使用三元表达式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str5 = <span class="string">`icon-<span class="subst">$&#123;isLarge?<span class="string">&#x27;big&#x27;</span>:<span class="string">&#x27;small&#x27;</span>&#125;</span>`</span> <span class="comment">// isLarge为布尔值</span></span><br></pre></td></tr></table></figure>
+
+<p>带标签的模板字符串：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">foo</span> = (<span class="params">a,b,c,d</span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a) <span class="comment">// [&quot;这是&quot;, &quot;,她今年&quot;, &quot;岁&quot;, raw: Array(3)]</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(b) <span class="comment">// lily</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(c) <span class="comment">// 20</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(d) <span class="comment">// undefined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;lily&#x27;</span></span><br><span class="line"><span class="keyword">const</span> age = <span class="number">20</span></span><br><span class="line">foo<span class="string">`这是<span class="subst">$&#123;name&#125;</span>,她今年<span class="subst">$&#123;age&#125;</span>岁`</span> <span class="comment">// 注意，这里不需要使用小括号</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="四、字符串的新-API"><a href="#四、字符串的新-API" class="headerlink" title="四、字符串的新 API"></a>四、字符串的新 API</h2><p>第一个是静态方法，其余四个都是实例方法。</p>
+<h4 id="1）String-fromCodePoint"><a href="#1）String-fromCodePoint" class="headerlink" title="1）String.fromCodePoint()"></a>1）String.fromCodePoint()</h4><p>ES5 中使用 String.fromCharCode() 将码点转化为字符，但是这个方法识别的码点不能超过 ffff。ES6 中使用 String.fromCodePoint() 方法，这个方法可以识别更大的码点范围。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(<span class="number">0x20BB7</span>)) <span class="comment">// 超出范围，无法正确输出</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">String</span>.<span class="title function_">fromCodePoint</span>(<span class="number">0x20BB7</span>)) <span class="comment">// 正确输出“𠮷”</span></span><br></pre></td></tr></table></figure>
+
+<p>这个方法用得较少。</p>
+<h4 id="2）String-prototype-includes"><a href="#2）String-prototype-includes" class="headerlink" title="2）String.prototype.includes()"></a>2）String.prototype.includes()</h4><p>ES5 中使用 indexOf() 判断一个字符串是否存在与给定字符串中，若存在返回对应下标，否则返回 -1， indexOf() 方法的返回值为数字；ES6 中使用 includes() 判断给定一个字符串是否存在与给定字符串中，返回值为布尔值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;hello&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str.<span class="title function_">indexOf</span>(<span class="string">&#x27;el&#x27;</span>)) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str.<span class="title function_">includes</span>(<span class="string">&#x27;el&#x27;</span>)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3）String-prototype-startsWith"><a href="#3）String-prototype-startsWith" class="headerlink" title="3）String.prototype.startsWith()"></a>3）String.prototype.startsWith()</h4><p>判断字符串是否以某个字符串开头。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;hello&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str.<span class="title function_">startsWith</span>(<span class="string">&#x27;he&#x27;</span>)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4）String-prototype-endsWith"><a href="#4）String-prototype-endsWith" class="headerlink" title="4）String.prototype.endsWith()"></a>4）String.prototype.endsWith()</h4><p>判断字符串是否以某个字符串结尾。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;hello&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str.<span class="title function_">endsWith</span>(<span class="string">&#x27;o&#x27;</span>)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5）String-prototype-repeat"><a href="#5）String-prototype-repeat" class="headerlink" title="5）String.prototype.repeat()"></a>5）String.prototype.repeat()</h4><p>用于重复字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;hello&#x27;</span></span><br><span class="line"><span class="keyword">const</span> str3 = str.<span class="title function_">repeat</span>(<span class="number">3</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str3) <span class="comment">// hellohellohello</span></span><br></pre></td></tr></table></figure>
+
+
+
+<img src="1.jpeg">
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/23/ES014/" data-id="clur520qh000pmoccbl9y6k6v" data-title="（十四）ES6：字符串的扩展" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ES013" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/23/ES013/" class="article-date">
+  <time class="dt-published" datetime="2021-02-23T08:50:12.000Z" itemprop="datePublished">2021-02-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/23/ES013/">（十三）ES6：新的数据结构 Map与WeakMap</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、Map"><a href="#一、Map" class="headerlink" title="一、Map"></a>一、Map</h2><p>Map 和对象类似，也是键值对的形式。对象的 key 可以是字符串也可以是 Symbol；而 Map 的 key 不仅限于这两种，任何数据类型都可以作为 Map 的 key。Map 通过 <code>set()</code> 设置值，通过<code>get()</code>读取值，通过<code>has()</code>判断某个 key 是否存在，通过<code>delete</code>删除值，通过<code>clear()</code>清空，拥有<code>size</code>属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> m = <span class="keyword">new</span> <span class="title class_">Map</span>()</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">m.<span class="title function_">set</span>(obj, <span class="string">&#x27;es&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m) <span class="comment">// Map(1) &#123;&#123;…&#125; =&gt; &quot;es&quot;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="property">size</span>) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="title function_">get</span>(obj)) <span class="comment">// es</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="title function_">has</span>(obj)) <span class="comment">//true</span></span><br><span class="line">m.<span class="title function_">delete</span>(obj)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m) <span class="comment">// Map(0) &#123;&#125;</span></span><br><span class="line">m.<span class="title function_">set</span>(obj, <span class="string">&#x27;es&#x27;</span>)</span><br><span class="line">m.<span class="title function_">clear</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m) <span class="comment">// Map(0) &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以使用数组的方式给 Map 设置值：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> m = <span class="keyword">new</span> <span class="title class_">Map</span>([</span><br><span class="line">  [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;lily&#x27;</span>],</span><br><span class="line">  [<span class="string">&#x27;age&#x27;</span>, <span class="number">20</span>]</span><br><span class="line">])</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m) <span class="comment">// Map(2) &#123;&quot;name&quot; =&gt; &quot;lily&quot;, &quot;age&quot; =&gt; 20&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Map 的遍历方式与 Set 一致，使用<code>forEach</code>或者<code>for of</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">m.<span class="title function_">forEach</span>(<span class="function">(<span class="params">value, key</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(value, key))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> [key,value] <span class="keyword">of</span> m) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key, value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">of</span> m.<span class="title function_">keys</span>()) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> value <span class="keyword">of</span> m.<span class="title function_">values</span>()) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [key, value] <span class="keyword">of</span> m.<span class="title function_">entries</span>()) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Map 的 API 比 Object 的API 更灵活；在频繁增删键值对的场景，Map 的性能优于 Object。</p>
+<h2 id="二、WeakMap"><a href="#二、WeakMap" class="headerlink" title="二、WeakMap"></a>二、WeakMap</h2><p>WeakMap 与 Map 的区别：<strong>WeakMap 的 key 只支持引用数据类型；WeakMap 不支持 clear() 方法；WeakMap 不支持遍历；WeakMap 没有 size 属性；WeakMap 是一种弱引用。</strong></p>
+<p>弱引用有益于防止内存泄露。</p>
+<img src="1.jpeg">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/23/ES013/" data-id="clur520qg000nmocc5yqq6ir4" data-title="（十三）ES6：新的数据结构 Map与WeakMap" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ES012" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/23/ES012/" class="article-date">
+  <time class="dt-published" datetime="2021-02-23T07:48:12.000Z" itemprop="datePublished">2021-02-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/23/ES012/">（十二）ES6：新的数据结构 Set与WeakSet</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、Set"><a href="#一、Set" class="headerlink" title="一、Set"></a>一、Set</h2><p>Set 和数组很相似，但是 Set 中不会出现相同的值。我们可以使用 new 来创建 Set。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s) <span class="comment">// Set(0) &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> s2 = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s2) <span class="comment">// Set(3) &#123;1, 2, 3&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1、Set-常用方法"><a href="#1、Set-常用方法" class="headerlink" title="1、Set 常用方法"></a>1、Set 常用方法</h4><h5 id="1）add"><a href="#1）add" class="headerlink" title="1）add()"></a>1）add()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line">s.<span class="title function_">add</span>(<span class="string">&#x27;apple&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s) <span class="comment">// Set(4) &#123;1, 2, 3, &quot;apple&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>add() 方法支持链式操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>])</span><br><span class="line">s.<span class="title function_">add</span>(<span class="string">&#x27;apple&#x27;</span>).<span class="title function_">add</span>(<span class="string">&#x27;mango&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s) <span class="comment">// Set(4) &#123;1, 2, 3, &quot;apple&quot;, &quot;mango&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2）delete"><a href="#2）delete" class="headerlink" title="2）delete()"></a>2）delete()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">s.<span class="title function_">delete</span>(<span class="number">2</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s) <span class="comment">// Set(2) &#123;1, 3&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3）clear"><a href="#3）clear" class="headerlink" title="3）clear()"></a>3）clear()</h5><p>用于清空 Set。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">s.<span class="title function_">clear</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s) <span class="comment">// Set(0) &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="4）has"><a href="#4）has" class="headerlink" title="4）has()"></a>4）has()</h5><p>用于判断当前 Set 中是否包含某个数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;apple&#x27;</span>])</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s.<span class="title function_">has</span>(<span class="string">&#x27;apple&#x27;</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s.<span class="title function_">has</span>(<span class="string">&#x27;mango&#x27;</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、Set-的属性"><a href="#2、Set-的属性" class="headerlink" title="2、Set 的属性"></a>2、Set 的属性</h4><h5 id="1）size"><a href="#1）size" class="headerlink" title="1）size"></a>1）size</h5><p>数组使用<code>length</code>属性保存数组长度，Set 使用<code>size</code>属性保存数组长度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;apple&#x27;</span>])</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s.<span class="property">size</span>) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3、Set-的遍历"><a href="#3、Set-的遍历" class="headerlink" title="3、Set 的遍历"></a>3、Set 的遍历</h4><h5 id="1）forEach"><a href="#1）forEach" class="headerlink" title="1）forEach"></a>1）forEach</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;apple&#x27;</span>])</span><br><span class="line">s.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(item)) <span class="comment">// 1    2    apple</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2）for-of-与-values-、keys-、entris"><a href="#2）for-of-与-values-、keys-、entris" class="headerlink" title="2）for of 与 values()、keys()、entris()"></a>2）for of 与 values()、keys()、entris()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="string">&#x27;apple&#x27;</span>])</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> s) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item) <span class="comment">// 1    2    apple</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> s.<span class="title function_">keys</span>()) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item) <span class="comment">// 1    2    apple</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> s.<span class="title function_">values</span>()) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item) <span class="comment">// 1    2    apple</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> s.<span class="title function_">entries</span>()) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item[<span class="number">0</span>], item[<span class="number">1</span>]) <span class="comment">// 1 1    2 2    apple apple</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Set 的 key 与 value 是相同的。</p>
+<h4 id="4、Set-转换成-Array"><a href="#4、Set-转换成-Array" class="headerlink" title="4、Set 转换成 Array"></a>4、Set 转换成 Array</h4><p>数组转换成 Set 非常简单，把数组作为 Set 的参数就行。将 Set 转换成数组，我们可以使用<code>...</code>或者<code>Array.from()</code>。使用 <code>Array.prototype.slice.call()</code> 无效，只会得到一个空数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="keyword">let</span> arr1 = [...s] </span><br><span class="line"><span class="keyword">let</span> arr2 = <span class="title class_">Array</span>.<span class="title function_">from</span>(s)</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、WeakSet"><a href="#二、WeakSet" class="headerlink" title="二、WeakSet"></a>二、WeakSet</h2><p>WeakSet 与 Set的区别就是： <strong>WeakSet 中只能存储对象，存储了别的类型会报错；WeakSet 不能够遍历；WeakSet 中存储的对象都是弱引用。</strong></p>
+<p>因为 WeakSet 存储的是对象，因此对 WeakSet 使用 delete() 方法时需要注意：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ws = <span class="keyword">new</span> <span class="title class_">WeakSet</span>()</span><br><span class="line">ws.<span class="title function_">add</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line">ws.<span class="title function_">delete</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ws) <span class="comment">// WeakSet &#123;&#123;…&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样并不能删除掉 { name: ‘lily’ } 对象，因为 delete 的对象和 add 进 ws 里的并不是同一个对象（并不是同一个引用），它们只是值一样，所以我们建议向下面这样 add 和 delete 对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ws = <span class="keyword">new</span> <span class="title class_">WeakSet</span>()</span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">ws.<span class="title function_">add</span>(obj1)</span><br><span class="line">ws.<span class="title function_">delete</span>(obj1)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ws) <span class="comment">// WeakSet &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>WeakSet 中存储的对象都是弱引用，ES 中的垃圾回收机制是不会考虑弱引用的，也就是垃圾回收机制不会考虑 WeakSet 对 对象的引用。假设一个 WeakSet 中存储了对象 obj1，但是别的地方并没有引用这个 obj1，那么垃圾回收机制依旧会把这个 obj1 回收掉。因此，弱引用有益于防止内存泄露。</p>
+<img src="1.jpeg">
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/23/ES012/" data-id="clur520qg000lmocc36gv0six" data-title="（十二）ES6：新的数据结构 Set与WeakSet" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ES011" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/23/ES011/" class="article-date">
+  <time class="dt-published" datetime="2021-02-23T04:55:12.000Z" itemprop="datePublished">2021-02-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/23/ES011/">（十一）ES6：新的原始数据类型 Symbol</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p> 每个 Symbol 都是独一无二的。</p>
+<h2 id="一、声明方式"><a href="#一、声明方式" class="headerlink" title="一、声明方式"></a>一、声明方式</h2><h4 id="1）Symbol"><a href="#1）Symbol" class="headerlink" title="1）Symbol()"></a>1）Symbol()</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="title class_">Symbol</span>()</span><br><span class="line"><span class="keyword">let</span> s2 = <span class="title class_">Symbol</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1) <span class="comment">// Symbol()</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> s1) <span class="comment">// symbol</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1 === s2) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>这种方式声明的两个 symbol 并不相等。每次使用 Symbol() 时，都会生成一个新的 Symbol。我们还可以给 symbol 传入字符串：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s3 = <span class="title class_">Symbol</span>(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s3) <span class="comment">// Symbol(foo)</span></span><br></pre></td></tr></table></figure>
+
+<p>如果给 symbol 传入对象，则会调用该对象的 toString() 方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span>,</span><br><span class="line">  <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> s = <span class="title class_">Symbol</span>(obj)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s) <span class="comment">// Symbol(lily)</span></span><br></pre></td></tr></table></figure>
+
+<p>Symbol 并不是对象，因此并不能给 Symbol 添加属性；Symbol 也不是构造函数，不能在 Symbol 前面添加 new 操作符。Symbol 有一个 API <code>description</code>，可以查看 Symbol 的描述：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="title class_">Symbol</span>()</span><br><span class="line"><span class="keyword">let</span> s2 = <span class="title class_">Symbol</span>(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1.<span class="property">description</span>) <span class="comment">// undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s2.<span class="property">description</span>) <span class="comment">// foo</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2）Symbol-for"><a href="#2）Symbol-for" class="headerlink" title="2）Symbol.for()"></a>2）Symbol.for()</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> s2 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1) <span class="comment">// Symbol(foo)</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1 === s2) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 Symbol.for() 生成的 Symbol 也是独一无二的，上述示例是多个变量指向同一个 Symbol。因为这种声明方式是在全局的环境中声明 Symbol。上述示例中，当我们再次声明 Symbol.for(‘foo’) 时并赋值给 s2 时，它会去全局的环境中找是否已经存在描述为 foo 的 Symbol，如果有的话就将它赋值给 s2。因此 s1 和 s2 是同一个 Symbol。而使用 Symbol() 时，每次都会生成一个新的 Symbol，它并不会在全局环境下查找、声明。</p>
+<p>无论是否在全局作用域下，以 Symbol.for() 声明的 Symbol 都是存在于全局环境下的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;foo&#x27;</span>) <span class="comment">// 生成的Symbol(foo)存在于全局环境中</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> x = <span class="title function_">foo</span>()</span><br><span class="line"><span class="keyword">const</span> y = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;foo&#x27;</span>) <span class="comment">// 在全局环境中找到了Symbol(foo)并指向它</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x === y) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以通过<code>Symbol.keyFor()</code>返回已经在全局环境下登记的 Symbol 的描述。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> s1 = <span class="title class_">Symbol</span>(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Symbol</span>.<span class="title function_">keyFor</span>(s1)) <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> s2 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Symbol</span>.<span class="title function_">keyFor</span>(s2)) <span class="comment">// foo</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、应用场景"><a href="#二、应用场景" class="headerlink" title="二、应用场景"></a>二、应用场景</h2><p>我们定义一个对象表示班级，班级里是可能会出现同名的两个人的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> grade = &#123;</span><br><span class="line">  李四: &#123; <span class="attr">address</span>: <span class="string">&#x27;xxx&#x27;</span>, <span class="attr">tel</span>: <span class="string">&#x27;111&#x27;</span> &#125;,</span><br><span class="line">  李四: &#123; <span class="attr">address</span>: <span class="string">&#x27;yyy&#x27;</span>, <span class="attr">tel</span>: <span class="string">&#x27;222&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(grade)</span><br></pre></td></tr></table></figure>
+
+<p>这样输出的 grade 里只会有第二个李四，因为属性名相同时后面的会把前面的覆盖。我们之前讲过，是可以使用变量来当做属性名的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> stu1 = <span class="string">&#x27;李四&#x27;</span></span><br><span class="line"><span class="keyword">const</span> stu2 = <span class="string">&#x27;李四&#x27;</span></span><br><span class="line"><span class="keyword">const</span> grade = &#123;</span><br><span class="line">  [stu1]: &#123; <span class="attr">address</span>: <span class="string">&#x27;xxx&#x27;</span>, <span class="attr">tel</span>: <span class="string">&#x27;111&#x27;</span> &#125;,</span><br><span class="line">  [stu2]: &#123; <span class="attr">address</span>: <span class="string">&#x27;yyy&#x27;</span>, <span class="attr">tel</span>: <span class="string">&#x27;222&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(grade)</span><br></pre></td></tr></table></figure>
+
+<p>这样生成的 grade 里也只有第二个李四。因为他们的属性名依旧都是李四。这个时候我们就可以使用 symbol，因为每个 Symbol 都是独一无二的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> stu1 = <span class="title class_">Symbol</span>(<span class="string">&#x27;李四&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> stu2 = <span class="title class_">Symbol</span>(<span class="string">&#x27;李四&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> grade = &#123;</span><br><span class="line">  [stu1]: &#123; <span class="attr">address</span>: <span class="string">&#x27;xxx&#x27;</span>, <span class="attr">tel</span>: <span class="string">&#x27;111&#x27;</span> &#125;,</span><br><span class="line">  [stu2]: &#123; <span class="attr">address</span>: <span class="string">&#x27;yyy&#x27;</span>, <span class="attr">tel</span>: <span class="string">&#x27;222&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(grade)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(grade[stu1]) <span class="comment">// &#123;address: &#x27;xxx&#x27;, tel: &#x27;111&#x27;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(grade[stu1]) <span class="comment">// &#123;address: &#x27;yyy&#x27;, tel: &#x27;222&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>grade 输出结果如下：</p>
+<img src="1.png" width="50%">
+
+<h2 id="三、对象中-Symbol-属性的遍历"><a href="#三、对象中-Symbol-属性的遍历" class="headerlink" title="三、对象中 Symbol 属性的遍历"></a>三、对象中 Symbol 属性的遍历</h2><p>使用<code>for in</code>、<code>Object.keys()</code>方法遍历不到 Symbol 属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sym = <span class="title class_">Symbol</span>(<span class="string">&#x27;age&#x27;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>[sym] = <span class="number">20</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">getSym</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>[sym]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&#x27;lily&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(user.<span class="title function_">getSym</span>()) <span class="comment">// 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> user) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key) <span class="comment">// 这里只会输出name，读取不到symbol</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="title class_">Object</span>.<span class="title function_">keys</span>(user)) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key) <span class="comment">// 这里只会输出name，读取不到symbol</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是我们可以通过<code>Object.getOwnPropertySymbols()</code>方法遍历出 Symbol 属性，这个方法只能遍历 Symbol 属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">of</span> <span class="title class_">Object</span>.<span class="title function_">getOwnPropertySymbols</span>(user))&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key) <span class="comment">// Symbol(age)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以通过<code>Reflect.ownKeys()</code>方法同时遍历出普通属性和 Symbol 属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(user)) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key) <span class="comment">// name    Symbol(age)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/23/ES011/" data-id="clur520qf000jmocchngh08qb" data-title="（十一）ES6：新的原始数据类型 Symbol" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ES010" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/22/ES010/" class="article-date">
+  <time class="dt-published" datetime="2021-02-22T12:19:12.000Z" itemprop="datePublished">2021-02-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/22/ES010/">（十）ES6：类与继承</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。</p>
+<p>​	在 ES6 中新增了<code>class</code>关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">showName</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="title class_">People</span>(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1)</span><br></pre></td></tr></table></figure>
+
+<p>我们来看一下输出：</p>
+<img src="1.jpeg" width="50%">
+
+<p>我们可以看出来，这和 ES5 中组合使用构造函数模式与原型模式得到的结果一致。所以我们也把 class 叫做“语法糖”，因为它可以让我们更快乐的写代码（因为写法更简单了嘿嘿）。我们在看一下 ES6 中如何实现继承，ES6 中出现了一个新的关键字<code>extends</code>用于类的继承。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Coder</span> <span class="keyword">extends</span> <span class="title class_ inherited__">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age, skill</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(name, age) <span class="comment">// 从父类People中继承name和age属性</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">skill</span> = skill</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">showSkill</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">skill</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c1 = <span class="keyword">new</span> <span class="title class_">Coder</span>(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;code&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c1)</span><br></pre></td></tr></table></figure>
+
+<p>我们在看一下输出结果：</p>
+<img src="2.jpeg" width="50%">
+
+<p>在 ES6 中，我们还可以使用设置方法的形式设置属性，具体看下例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">showName</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="title class_">People</span>(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1.<span class="property">sex</span>) <span class="comment">// female</span></span><br></pre></td></tr></table></figure>
+
+<p>我们通过<code>get</code>关键字设置了一个属性 sex，并且通过 p1.sex 读取了 sex 属性。但是 get 关键字总能够让 sex 属性被读，并不能让 sex 属性被写。想让 sex 属性被写我们还需要<code>set</code>。但是我们要注意不能这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误演示</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title function_">sex</span>(<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">sex</span> = val</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="title class_">People</span>(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line">p1.<span class="property">sex</span> = <span class="string">&#x27;male&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上代码会提示“Maximum call stack size exceeded”，原因是陷入了死循环。因为执行 p1.sex &#x3D; ‘male’ 时，会调用 set sex(){} 方法。set sex(){} 方法内部设置 this.sex &#x3D; val 时，也会调用 set sex(){} 方法， set sex(){} 方法内部执行 this.sex &#x3D; val 时又调用了  set sex(){} 方法。因此这是一个死循环，我们应该这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_sex</span> = <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_sex</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title function_">sex</span>(<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_sex</span> = val</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="title class_">People</span>(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1.<span class="property">sex</span>) <span class="comment">// female</span></span><br><span class="line">p1.<span class="property">sex</span> = <span class="string">&#x27;male&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1.<span class="property">sex</span>) <span class="comment">// male</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们需要对值进行一些业务逻辑处理再进行读和写时，就应该使用这种方法。通过这种方式设置的属性也可以被子类继承。</p>
+<p>我们再看一下如何在 ES6 中定义静态属性和方法。ES6 中使用<code>static</code>关键字定义静态方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">getCount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">5</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">People</span>.<span class="title function_">getCount</span>()) <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+
+<p>ES6 的 class 内部目前并不能定义静态属性，我们可使用 ES5 中定义静态属性的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">People</span>.<span class="property">count</span> = <span class="number">1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">People</span>.<span class="property">count</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>再次强调：<strong>class 只是“语法糖”，使用 class 定义出的类，底层还是和 ES5 中组合使用构造函数和原型方式定义出的“类”一样。</strong>我们可以使用 type of 方式检测上面示例中的 People，结果是 function。</p>
+<p>下面的例子使用 babel 将 ES6 转化成 ES5，让大家更好的理解一下：</p>
+<img src="3.png">
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/22/ES010/" data-id="clur520qf000hmocc5xv7e9o5" data-title="（十）ES6：类与继承" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ES009" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/19/ES009/" class="article-date">
+  <time class="dt-published" datetime="2021-02-19T08:25:36.000Z" itemprop="datePublished">2021-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/19/ES009/">（九）ES：深拷贝与浅拷贝、手写深拷贝函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>浅拷贝拷贝的是引用地址，深拷贝拷贝的是值。</strong>基本数据类型进行的都是深拷贝。</p>
+<p>我们在上一篇说过，<code>Object.assign()</code>可以实现对象的拷贝与合并。但是 Object.assign() 方法只能实现浅拷贝。我们看一下例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> source = &#123;</span><br><span class="line">  <span class="attr">a</span>: &#123;</span><br><span class="line">    <span class="attr">b</span>: &#123;</span><br><span class="line">      <span class="attr">c</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">e</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">f</span>: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">assign</span>(target, source)</span><br></pre></td></tr></table></figure>
+
+<p>以上代码可以将 sourse 拷贝给 target。我们也说过，如果出现了相同的属性名，后面的会将前面的覆盖。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = &#123;</span><br><span class="line">  <span class="attr">a</span>: &#123;</span><br><span class="line">    <span class="attr">e</span>: <span class="number">4</span>,</span><br><span class="line">    <span class="attr">f</span>: <span class="number">5</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> source = &#123;</span><br><span class="line">  <span class="attr">a</span>: &#123;</span><br><span class="line">    <span class="attr">e</span>: <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">assign</span>(target, source)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target)</span><br></pre></td></tr></table></figure>
+
+<p>此时，target 与 source 里都有属性 a，source 的 a 会覆盖 target 的 a。但是拷贝过去的是 a 的引用地址，而不是a的值。因此 target 的输出结果是 { a: { e:2 } }。如果覆盖过去的是值，那么 source 里  a 的 e 属性会覆盖掉 target 里 a 的 e 属性，并保留 target 里  a 的 f 属性，那么 target 应该是  { a: { e:2, f:5 } }。实际上，是将 source 里  a  保存的对象的引用地址复制给了 target 里的 a。因此 Object.assign() 方法实现的是浅拷贝。</p>
+<p><strong>我们可以使用<code>JSON.stringify()</code>与<code>JSON.parse()</code>实现深拷贝。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> str = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj1)</span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(str)</span><br></pre></td></tr></table></figure>
+
+<p>此时就实现了 obj2 对 obj1 的深拷贝，它们指向的不是同一个对象。但是这种方法并不能拷贝对象里的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span>,</span><br><span class="line">  <span class="title class_">Hi</span>()&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hi&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> str = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj1)</span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(str)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj2) <span class="comment">// obj2里只有name属性，并没有Hi()方法。</span></span><br><span class="line"><span class="comment">// 因JSON.stringify()方法在序列化JS对象的时候会忽略掉所有函数及原型成员</span></span><br></pre></td></tr></table></figure>
+
+<p>我们再来手写一个深拷贝函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查数据类型</span></span><br><span class="line"><span class="keyword">let</span> <span class="title function_">checkType</span> = data =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(data).<span class="title function_">slice</span>(<span class="number">8</span>, -<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 实现深拷贝</span></span><br><span class="line"><span class="keyword">let</span> <span class="title function_">deepClone</span> = target =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> targetType = <span class="title function_">checkType</span>(target)</span><br><span class="line">  <span class="keyword">let</span> result</span><br><span class="line">  <span class="keyword">if</span> (targetType === <span class="string">&#x27;Object&#x27;</span>) &#123;</span><br><span class="line">    result = &#123;&#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetType === <span class="string">&#x27;Array&#x27;</span>) &#123;</span><br><span class="line">    result = []</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> target) &#123;</span><br><span class="line">    <span class="keyword">let</span> value = target[i]</span><br><span class="line">    <span class="keyword">let</span> valueType = <span class="title function_">checkType</span>(value)</span><br><span class="line">    <span class="keyword">if</span> (valueType === <span class="string">&#x27;Object&#x27;</span> || valueType === <span class="string">&#x27;Array&#x27;</span>) &#123;</span><br><span class="line">      result[i] = <span class="title function_">deepClone</span>(value)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result[i] = value</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">let</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, &#123;<span class="attr">age</span>: <span class="number">18</span>&#125;]</span><br><span class="line"><span class="keyword">let</span> arr2 = <span class="title function_">deepClone</span>(arr1)</span><br><span class="line">arr2[<span class="number">2</span>].<span class="property">age</span> = <span class="number">34</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr1)</span><br></pre></td></tr></table></figure>
+
+<p>deepClone 函数可以对 对象、数组、基本数据类型 实现深拷贝，也可以拷贝对象里的方法。</p>
+<img src="1.jpeg">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/19/ES009/" data-id="clur520qe000fmocc3ox5a5j8" data-title="（九）ES：深拷贝与浅拷贝、手写深拷贝函数" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ES008" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/19/ES008/" class="article-date">
+  <time class="dt-published" datetime="2021-02-19T03:25:36.000Z" itemprop="datePublished">2021-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/19/ES008/">（八）ES6：对象的扩展</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="1-属性简介表示法"><a href="#1-属性简介表示法" class="headerlink" title="1. 属性简介表示法"></a>1. 属性简介表示法</h4><p>在 ES6 中，如果对象的属性名与属性值相同，就可以简写。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;lily&#x27;</span></span><br><span class="line"><span class="keyword">let</span> age = <span class="number">24</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: name,</span><br><span class="line">  <span class="attr">age</span>: age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>obj 对象可以简写成这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  name,</span><br><span class="line">  age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-属性名表达式"><a href="#2-属性名表达式" class="headerlink" title="2. 属性名表达式"></a>2. 属性名表达式</h4><p>我们知道，属性值是可以使用变量的。在 ES6 中，属性名也可以使用变量，只需要给变量加上[ ]。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n = <span class="string">&#x27;name&#x27;</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="string">&#x27;age&#x27;</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  [n]: <span class="string">&#x27;lily&#x27;</span>,</span><br><span class="line">  [a]: <span class="number">24</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-方法的简写"><a href="#3-方法的简写" class="headerlink" title="3. 方法的简写"></a>3. 方法的简写</h4><p>首先看一个普通的写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span>,</span><br><span class="line">  <span class="attr">sayHi</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hi,&#x27;</span> + <span class="variable language_">this</span>.<span class="property">name</span>) <span class="comment">// Hi,lily</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">sayHi</span>()</span><br></pre></td></tr></table></figure>
+
+<p>注意：<strong>对象的方法不可以使用箭头函数</strong>，因为箭头函数内的this并不会指向这个对象本身。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span>,</span><br><span class="line">  <span class="attr">sayHi</span>: <span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hi,&#x27;</span> + <span class="variable language_">this</span>.<span class="property">name</span>) <span class="comment">// Hi,undefined</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">sayHi</span>()</span><br><span class="line"><span class="comment">// 不要这样写！！</span></span><br></pre></td></tr></table></figure>
+
+<p>但是对象的方法可以省略冒号和 function 关键字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span>,</span><br><span class="line">  <span class="title function_">sayHi</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hi,&#x27;</span> + <span class="variable language_">this</span>.<span class="property">name</span>) <span class="comment">// Hi,lily</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">sayHi</span>()</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-Object-is"><a href="#4-Object-is" class="headerlink" title="4. Object.is()"></a>4. Object.is()</h4><p>这个方法和全等(&#x3D;&#x3D;&#x3D;)类似，我们先看一下它的用法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">is</span>(<span class="number">2</span>, <span class="string">&#x27;2&#x27;</span>) <span class="comment">// 结果为false</span></span><br></pre></td></tr></table></figure>
+
+<p>我们看一下几个不同的点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">NaN</span> == <span class="title class_">NaN</span>) <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">is</span>(<span class="title class_">NaN</span>, <span class="title class_">NaN</span>)) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(+<span class="number">0</span> == -<span class="number">0</span>) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">is</span>(+<span class="number">0</span>, -<span class="number">0</span>)) <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<p>关于对象的相等判断，我们也要注意，对象是引用类型，判断的是引用地址是否相同，而不是值是否相同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123; <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span> &#125; <span class="comment">// 创建了一个对象</span></span><br><span class="line"><span class="keyword">let</span> obj2 = &#123; <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span> &#125; <span class="comment">// 创建了一个新对象</span></span><br><span class="line"><span class="comment">// obj1 和 obj2 指向的并不是同一个对象</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj1 == obj2) <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">is</span>(obj1,obj2)) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj3 = obj1</span><br><span class="line"><span class="comment">// obj1 和 obj3 指向的是同一个对象</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj1 == obj3) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">is</span>(obj1,obj3)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-扩展运算符-与-Object-assign"><a href="#5-扩展运算符-与-Object-assign" class="headerlink" title="5. 扩展运算符 与 Object.assign()"></a>5. 扩展运算符 与 Object.assign()</h4><p>扩展预算符 与 Object.assign() 都可以实现对象的复制。扩展预算符可以将参数对象可遍历的属性拷贝到当前对象里。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = &#123; <span class="attr">a</span>: <span class="number">3</span>, <span class="attr">b</span>: <span class="number">4</span> &#125;</span><br><span class="line"><span class="keyword">let</span> y = &#123;...x&#125; <span class="comment">// 将x可遍历的属性拷贝到y里</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(y) <span class="comment">// &#123;a: 3, b: 4&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Object.assign() 方法用于对象合并，Object.assign() 方法的第一个参数是目标对象，后面的参数对象会被合并到目标对象里。我们看一个具体的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = &#123; <span class="attr">a</span>: <span class="number">3</span> &#125;</span><br><span class="line"><span class="keyword">let</span> y = &#123; <span class="attr">b</span>: <span class="number">4</span> &#125;</span><br><span class="line"><span class="keyword">let</span> z = &#123; <span class="attr">c</span>: <span class="number">5</span> &#125;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">assign</span>(z, x, y)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(z) <span class="comment">// &#123;c: 5, a: 3, b: 4&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果有相同的属性，后面的对象会覆盖前面对象的属性值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = &#123; <span class="attr">a</span>: <span class="number">3</span> &#125;</span><br><span class="line"><span class="keyword">let</span> y = &#123; <span class="attr">a</span>: <span class="number">4</span> &#125;</span><br><span class="line"><span class="keyword">let</span> z = &#123; <span class="attr">a</span>: <span class="number">5</span> &#125;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">assign</span>(z, x, y) <span class="comment">// &#123;a: 4&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(z)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-in"><a href="#6-in" class="headerlink" title="6. in"></a>6. in</h4><p>in 可以判断当前对象中是否包含某个属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = &#123; <span class="attr">a</span>: <span class="number">5</span> &#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;a&#x27;</span> <span class="keyword">in</span> x) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>in 不仅可以用在对象上，也可以被用于数组。但是并不是判断某个值是否存在，而是判断某个下标的位置是否有值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span> <span class="keyword">in</span> arr) <span class="comment">// arr[3]上没有值，因此为 false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="7-对象的遍历方式"><a href="#7-对象的遍历方式" class="headerlink" title="7. 对象的遍历方式"></a>7. 对象的遍历方式</h4><h5 id="1）for-in"><a href="#1）for-in" class="headerlink" title="1）for in"></a>1）for in</h5><p>这是 ES5 中的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">24</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key, obj[key])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们再来看几个 ES6 中遍历对象的方法，下列演示的输出结果与上面使用for in的输出结果一致。</p>
+<h5 id="2）Object-keys"><a href="#2）Object-keys" class="headerlink" title="2）Object.keys()"></a>2）Object.keys()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(obj).<span class="title function_">forEach</span>(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key, obj[key])</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="3）Object-getOwnPropertyNames"><a href="#3）Object-getOwnPropertyNames" class="headerlink" title="3）Object.getOwnPropertyNames()"></a>3）Object.getOwnPropertyNames()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">getOwnPropertyNames</span>(obj).<span class="title function_">forEach</span>(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key, obj[key])</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="4）Reflect-ownKeys"><a href="#4）Reflect-ownKeys" class="headerlink" title="4）Reflect.ownKeys()"></a>4）Reflect.ownKeys()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(obj).<span class="title function_">forEach</span>(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key, obj[key])</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<img src="1.jpeg">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/19/ES008/" data-id="clur520qc000amocc54ic450j" data-title="（八）ES6：对象的扩展" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ES007" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/18/ES007/" class="article-date">
+  <time class="dt-published" datetime="2021-02-18T13:25:36.000Z" itemprop="datePublished">2021-02-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/18/ES007/">（七）ES6：箭头函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>箭头函数的特点：</p>
+<ul>
+<li>this 指向定义时所在的对象，而不是调用时所在的对象</li>
+<li>不可以作为构造函数</li>
+<li>不可以使用 arguments 对象</li>
+</ul>
+<p>我们首先莱肯一个箭头函数的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通函数</span></span><br><span class="line"><span class="keyword">let</span> sum = <span class="keyword">function</span>(<span class="params">x,y</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> x + y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 箭头函数</span></span><br><span class="line"><span class="keyword">let</span> <span class="title function_">sum2</span> = (<span class="params">x, y</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> x + y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当函数体只有一行代码且需要 return 时，函数体可以简写</span></span><br><span class="line"><span class="comment">// 如果只有一个参数，小括号也可以省略</span></span><br><span class="line"><span class="keyword">let</span> <span class="title function_">add</span> = x =&gt; x + <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p>不可以作为构造函数和不可以使用 arguments 对象都非常好理解，我们现在来讲一下什么是 this 指向定义时所在的对象，而不是调用时所在的对象。假设我们希望一秒后输出btn：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>)</span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">  &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;) <span class="comment">// 这样不行</span></span><br></pre></td></tr></table></figure>
+
+<p>这样并不能输出btn，因为我们知道，定时器里的 this 指向 window。改变 this 指向的有<code>call()</code>、<code>apply()</code>、<code>bind()</code>，我们在这里使用 bind() 方法，因为 call() 和 apply() 会让函数立即执行，bind() 方法才会让函数一秒后执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>)</span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">  &#125;.<span class="title function_">bind</span>(<span class="variable language_">this</span>), <span class="number">1000</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>我们在看看如何使用箭头函数来解决这个问题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>)</span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">  &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以了，因为箭头函数里的 this 指向定义时所在的对象，而不是调用时所在的对象。我们也可以用一个更简单的方式记忆与理解：箭头函数中没有 this 对象，因此当箭头函数里出现 this 时，它会读取上一级作用域中的 this。上述 this 出现在箭头函数里时，它会读取 addEventListener() 参数中的函数的 this 对象，也就是 btn。</p>
+<img src="1.jpeg">
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/18/ES007/" data-id="clur520qd000dmocc5v4wda39" data-title="（七）ES6：箭头函数" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;">综合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/18/ZH002/">浏览器中的进程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/26/HTTP013/">HTTP缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/31/HTTP012/">JSONP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/HTTP011/">常见 Web 攻击总结</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Vue007/">【Vue3.x】Vue3响应式原理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

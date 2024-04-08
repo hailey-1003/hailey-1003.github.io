@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>URI、URL、URN | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="URIUniform Resourse Identifier（统一资源标识符） 用来唯一标识互联网上的信息资源，是包含 URL 和 URN 的统一的定义。 URLUniform Resourse Locator（统一资源定位符） 例子：http:&#x2F;&#x2F;user:pass@host.com:80&#x2F;path?query&#x3D;string#hash  http:&#x2F;&#x2F; 定义以什么协议访问资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="URI、URL、URN">
+<meta property="og:url" content="http://example.com/2021/02/04/HTTP002/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="URIUniform Resourse Identifier（统一资源标识符） 用来唯一标识互联网上的信息资源，是包含 URL 和 URN 的统一的定义。 URLUniform Resourse Locator（统一资源定位符） 例子：http:&#x2F;&#x2F;user:pass@host.com:80&#x2F;path?query&#x3D;string#hash  http:&#x2F;&#x2F; 定义以什么协议访问资源">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/02/04/HTTP002/001.jpeg">
+<meta property="article:published_time" content="2021-02-04T03:32:02.000Z">
+<meta property="article:modified_time" content="2021-03-30T04:17:26.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="HTTP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/02/04/HTTP002/001.jpeg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-HTTP002" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/04/HTTP002/" class="article-date">
+  <time class="dt-published" datetime="2021-02-04T03:32:02.000Z" itemprop="datePublished">2021-02-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      URI、URL、URN
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h3><p>Uniform Resourse Identifier（统一资源标识符）</p>
+<p>用来唯一标识互联网上的信息资源，是包含 URL 和 URN 的统一的定义。</p>
+<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p>Uniform Resourse Locator（统一资源定位符）</p>
+<p>例子：<a target="_blank" rel="noopener" href="http://user:pass@host.com/path?query=string#hash">http://user:pass@host.com:80/path?query=string#hash</a></p>
+<ul>
+<li><strong>http:&#x2F;&#x2F;</strong> 定义以什么协议访问资源。</li>
+<li><strong>user:pass@</strong> 如果访问的资源需要特定的身份，我们可以通过这个表示身份，并且服务可以通过用户名与密码来进行验证。但是这样不安全，现在几乎用不到。</li>
+<li><strong>host.com</strong> 可以是域名也可以是 ip，用于定位资源所在服务器在互联网中的位置。</li>
+<li><strong>:80</strong> 端口，在一台服务器上可以运行很多软件的 web 服务，web 服务分别监听不同的端口。我们通过端口指定在找的是这台服务器上的哪个 web 服务。不写的情况下默认为 80 端口。</li>
+<li><strong>&#x2F;path</strong> 路由，在一个 web 服务上可能存放了很多不同的内容，我们通过路由来找到具体所需要的内容。写法与 linux 中文件目录的路径相似。</li>
+<li><strong>?query&#x3D;string</strong> 搜索参数</li>
+<li><strong>#hash</strong> 我们通过前面的部分找到了一个文档，这个文档可能非常大。但是客户端端可能不需要这么多的内容，只需要某一部分的内容。hash 就可以帮我们定位到文档的某一个片段。现在的 web 开发也常用 hash 作为锚点的定位工具。</li>
+</ul>
+<h3 id="URN"><a href="#URN" class="headerlink" title="URN"></a>URN</h3><p>永久统一资源定位符</p>
+<p>在资源移动之后还能被找到，但是目前还没有非常成熟的使用方案。</p>
+<img src="001.jpeg">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/04/HTTP002/" data-id="clur520qm0018moccavlj87li" data-title="URI、URL、URN" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/02/04/HTTP003/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          HTTP报文格式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/02/03/HTTP001/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">网络协议分层、HTTP协议发展历史、HTTP三次握手</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;">综合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/18/ZH002/">浏览器中的进程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/26/HTTP013/">HTTP缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/31/HTTP012/">JSONP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/HTTP011/">常见 Web 攻击总结</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Vue007/">【Vue3.x】Vue3响应式原理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

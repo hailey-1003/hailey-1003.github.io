@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>浏览器中的进程 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、浏览器中的进程 上图最新的 Chrome 浏览器架构图，从图中可以看出，最新的 Chrome 浏览器包括：1 个浏览器（Browser）主进程、1 个 GPU 进程、1 个网络（NetWork)进程、多个渲染进程和多个插件进程。  ① 浏览器进程（Browser 进程）浏览器的主进程，负责主控、协调，只有一个（无论打开几个 tab 或几个弹窗）。 主要作用： 负责各个页面的管控，创建和销毁其他">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器中的进程">
+<meta property="og:url" content="http://example.com/2021/07/18/ZH002/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、浏览器中的进程 上图最新的 Chrome 浏览器架构图，从图中可以看出，最新的 Chrome 浏览器包括：1 个浏览器（Browser）主进程、1 个 GPU 进程、1 个网络（NetWork)进程、多个渲染进程和多个插件进程。  ① 浏览器进程（Browser 进程）浏览器的主进程，负责主控、协调，只有一个（无论打开几个 tab 或几个弹窗）。 主要作用： 负责各个页面的管控，创建和销毁其他">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/07/18/ZH002/1.png">
+<meta property="article:published_time" content="2021-07-18T14:10:23.000Z">
+<meta property="article:modified_time" content="2021-07-23T07:13:01.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="综合">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/07/18/ZH002/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ZH002" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/18/ZH002/" class="article-date">
+  <time class="dt-published" datetime="2021-07-18T14:10:23.000Z" itemprop="datePublished">2021-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      浏览器中的进程
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、浏览器中的进程"><a href="#一、浏览器中的进程" class="headerlink" title="一、浏览器中的进程"></a>一、浏览器中的进程</h2><img src="1.png" style="zoom:50%;">
+上图最新的 Chrome 浏览器架构图，从图中可以看出，最新的 Chrome 浏览器包括：1 个浏览器（Browser）主进程、1 个 GPU 进程、1 个网络（NetWork)进程、多个渲染进程和多个插件进程。
+
+<h3 id="①-浏览器进程（Browser-进程）"><a href="#①-浏览器进程（Browser-进程）" class="headerlink" title="① 浏览器进程（Browser 进程）"></a>① 浏览器进程（Browser 进程）</h3><p>浏览器的主进程，负责主控、协调，只有一个（无论打开几个 tab 或几个弹窗）。</p>
+<h5 id="主要作用："><a href="#主要作用：" class="headerlink" title="主要作用："></a>主要作用：</h5><ul>
+<li>负责各个页面的管控，创建和销毁其他进程</li>
+<li>将 Render 进程得到的内存中的 Bitmap，绘制到用户界面上</li>
+<li>网络资源的下载、管理等</li>
+</ul>
+<h3 id="②-GPU-进程"><a href="#②-GPU-进程" class="headerlink" title="② GPU 进程"></a>② GPU 进程</h3><p>GPU（图形处理器）。<br>Chrome 刚开始发布的时候是没有 GPU 进程的，而 GPU 的使用初衷是为了实现 3D CSS 的效果，只是随后网页、Chrome 的 UI 界面都选择采用 GPU 来绘制，这使得 GPU 成为浏览器普遍的需求。最后，Chrome 在其多进程架构上也引入了 GPU 进程。</p>
+<h3 id="③-插件进程"><a href="#③-插件进程" class="headerlink" title="③ 插件进程"></a>③ 插件进程</h3><p>主要负责插件的运行。因为插件容易崩溃，所以需要通过插件进程来隔离，以保证插件进程的崩溃不会对浏览器和页面造成影响。<br>每种类型的插件对应一个进程，仅当使用该插件时才创建。</p>
+<h3 id="④-网络进程"><a href="#④-网络进程" class="headerlink" title="④ 网络进程"></a>④ 网络进程</h3><p>主要负责页面的网络资源加载，之前是作为一个模块运行在浏览器进程里面的，最近几年才独立出来，成为一个单独的进程。</p>
+<h3 id="⑤-浏览器渲染进程（浏览器内核）"><a href="#⑤-浏览器渲染进程（浏览器内核）" class="headerlink" title="⑤ 浏览器渲染进程（浏览器内核）"></a>⑤ 浏览器渲染进程（浏览器内核）</h3><p>浏览器渲染进程（Render 进程），即通常说的浏览器内核。<br>主要作用：页面渲染、脚本执行、事件处理。<br><em>每个 tab 页的打开都会创建一个 Render 进程，并且互不影响 。默认一个 tab 页对应一个 Render 进程，但是有时候浏览器会将多个进程进行合并，例如打开了多个空白标签页。</em></p>
+<h3 id="浏览器为什么多进程的？"><a href="#浏览器为什么多进程的？" class="headerlink" title="浏览器为什么多进程的？"></a>浏览器为什么多进程的？</h3><p>如果多个页面共享一个进程，那么在某个 tab 页崩溃时，将导致同进程中的其他页面也崩溃，及其影响用户体验。<br>而且进程之间不会共享资源和地址空间，所以不会存在太多安全问题。<br>当然，多进程相对于单进程而言，内存等资源的消耗更大。</p>
+<h2 id="二、浏览器内核中的线程"><a href="#二、浏览器内核中的线程" class="headerlink" title="二、浏览器内核中的线程"></a>二、浏览器内核中的线程</h2><p>它包含一下5种线程：</p>
+<h3 id="①-GUI-渲染线程（有且仅有一个）"><a href="#①-GUI-渲染线程（有且仅有一个）" class="headerlink" title="① GUI 渲染线程（有且仅有一个）"></a>① GUI 渲染线程（有且仅有一个）</h3><p>负责渲染浏览器界面，解析 HTML、CSS，构建 DOM 树、RenderObject树，布局、绘制等。<br>当页面需要重绘或者回流时，此程序就会执行。<br><em><em>GUI 线程和 JS 引擎线程互斥！！！</em></em><br>当 JS 引擎线程执行时，GUI 线程就会被挂起（相当于被冻结了），GUI  更新会被保存在一个队列中，等到 JS 引擎空闲时，立即被执行。</p>
+<h5 id="为什么-JS-引擎执行的时候-GUI-线程要被挂起？"><a href="#为什么-JS-引擎执行的时候-GUI-线程要被挂起？" class="headerlink" title="为什么 JS 引擎执行的时候 GUI 线程要被挂起？"></a>为什么 JS 引擎执行的时候 GUI 线程要被挂起？</h5><p>因为 JS 可以操作 DOM，如果可以在修改 DOM 的同时渲染页面，那么 GUI 渲染线性前后获得的元素数据就可能不一致。</p>
+<h3 id="②-JS-渲染引擎（有且只有一个）"><a href="#②-JS-渲染引擎（有且只有一个）" class="headerlink" title="② JS 渲染引擎（有且只有一个）"></a>② JS 渲染引擎（有且只有一个）</h3><p>JS 引擎线程也称为 JS 内核，负责处理 JS 脚本程序，解析 JS 脚本，运行代码。<br>JS 引擎一直等待着任务队列中任务的到来，然后加以处理。<br>因为 GUI 线程和 JS 引擎线程互斥，因此 JS 加载时间过长时，会造成页面渲染不连贯，导致页面加载阻塞。这就是为什么建议将 <code>&lt;script&gt;</code> 标签写在 body 的最末端的原因。</p>
+<h3 id="③-事件触发线程"><a href="#③-事件触发线程" class="headerlink" title="③ 事件触发线程"></a>③ 事件触发线程</h3><p>事件触发线程归属于浏览器，而不属于 JS 引擎，JS 引擎处理的事务过多，需要浏览器开线程来进行协助。<br><em>JS 是采用事件驱动机制来响应用户操作的，事件触发进程是通过维护事件循环和事件队列等方式，来响应和处理事件。</em><br>当处理一些不能立即执行的函数或代码时，会将对应的任务在其可以触发的的时机，添加到事件队列的末端。<br>事件循环机制会在 JS 引擎空闲时，循环访问事件队列的头部，如果有函数或代码，则会将其推入执行栈中并立即执行。</p>
+<h3 id="④-定时器触发线程（多个）"><a href="#④-定时器触发线程（多个）" class="headerlink" title="④ 定时器触发线程（多个）"></a>④ 定时器触发线程（多个）</h3><p>即 setInterval 与 setTimeout 所在的线程。<br>浏览器定时计数器并不是由 JS 引擎计数的，因为 JS 引擎是单线程的，如果处于阻塞线程状态就会影响计时器的准确性。<br>因此需要使用单独的线程来计时并触发定时器，计时完成后，添加到事件队列中，等待 JS 引擎空闲后执行。所以， <em>定时器中的任务在设定的时间不一定能够准时执行，定时器只是在指定的时间点将任务添加到事件队列中</em> 。</p>
+<h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><p>W3C 在 HTML 标准中规定，定时器的定时时间不能小于 4ms，如果是小于 4ms，则默认为 4ms。</p>
+<h3 id="⑤-异步-HTTP-请求线程（多个）"><a href="#⑤-异步-HTTP-请求线程（多个）" class="headerlink" title="⑤ 异步 HTTP 请求线程（多个）"></a>⑤ 异步 HTTP 请求线程（多个）</h3><p>XMLHttpRequest 连接后，通过浏览器开一个新的线程进行请求。<br>检测到状态变更时，如果设置有回调函数，异步 HTTP 请求线程就会产生状态变更事件，将回调函数放入事件队列中，等待 JS 引擎空闲后执行。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/18/ZH002/" data-id="clur520r0002dmocc8nftcaks" data-title="浏览器中的进程" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/06/26/HTTP013/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HTTP缓存</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;">综合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/18/ZH002/">浏览器中的进程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/26/HTTP013/">HTTP缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/31/HTTP012/">JSONP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/HTTP011/">常见 Web 攻击总结</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Vue007/">【Vue3.x】Vue3响应式原理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Cookie与Session | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、Coookie由于 HTTP 是一种无状态的协议，服务端没有办法从网络连接上判断用户的信息。因此服务端给用户分配一个“通行证”，无论谁访问都必须带上自己的通行证。这样服务端就能够从通行证上确认客户身份了。这就是 Cookie 的工作原理。 Cookie 实际上是一小段文本信息。客户端请求服务端信息时，如果服务端需要记录该用户的状态，就会给客户端发送一个 Cookie，客户端就会把 Cookie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cookie与Session">
+<meta property="og:url" content="http://example.com/2021/03/05/HTTP009/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、Coookie由于 HTTP 是一种无状态的协议，服务端没有办法从网络连接上判断用户的信息。因此服务端给用户分配一个“通行证”，无论谁访问都必须带上自己的通行证。这样服务端就能够从通行证上确认客户身份了。这就是 Cookie 的工作原理。 Cookie 实际上是一小段文本信息。客户端请求服务端信息时，如果服务端需要记录该用户的状态，就会给客户端发送一个 Cookie，客户端就会把 Cookie">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/03/05/HTTP009/1.png">
+<meta property="article:published_time" content="2021-03-05T05:42:12.000Z">
+<meta property="article:modified_time" content="2021-03-10T06:32:16.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="HTTP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/05/HTTP009/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-HTTP009" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/05/HTTP009/" class="article-date">
+  <time class="dt-published" datetime="2021-03-05T05:42:12.000Z" itemprop="datePublished">2021-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Cookie与Session
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、Coookie"><a href="#一、Coookie" class="headerlink" title="一、Coookie"></a>一、Coookie</h2><p>由于 HTTP 是一种无状态的协议，服务端没有办法从网络连接上判断用户的信息。因此服务端给用户分配一个“通行证”，无论谁访问都必须带上自己的通行证。这样服务端就能够从通行证上确认客户身份了。这就是 Cookie 的工作原理。</p>
+<p>Cookie 实际上是一小段文本信息。客户端请求服务端信息时，如果服务端需要记录该用户的状态，就会给客户端发送一个 Cookie，客户端就会把 Cookie 保存起来。当客户端再次请求该网站时，就会把该 Cookie 一同交给服务器。服务器检查该 Cookie，以次来辨别用户状态。服务器也可以根据需求修改 Cookie 的内容。</p>
+<p>有了Cookie这样的技术实现，服务器在接收到来自客户端浏览器的请求之后，就能够通过分析存放于请求头的Cookie得到客户端特有的信息，从而动态生成与该客户端相对应的内容。通常，我们可以从很多网站的登录界面中看到“请记住我”这样的选项，如果你勾选了它之后再登录，那么在下一次访问该网站的时候就不需要进行重复而繁琐的登录动作了，而这个功能就是通过Cookie实现的。</p>
+<p>有两个http头部是专门负责设置以及发送cookie的,它们分别是<code>Set-Cookie</code>以及<code>Cookie</code>。当服务器返回给客户端一个http响应信息时，其中如果包含Set-Cookie这个头部时，意思就是指示客户端建立一个cookie，并且在后续的http请求中自动发送这个cookie到服务器端，直到这个cookie过期。如果cookie的生存时间是整个会话期间的话，那么浏览器会将cookie保存在内存中，浏览器关闭时就会自动清除这个cookie。另外一种情况就是保存在客户端的硬盘中，浏览器关闭的话，该cookie也不会被清除，下次打开浏览器访问对应网站时，这个cookie就会自动再次发送到服务器端。一个cookie的设置以及发送过程分为以下四步：</p>
+<p>1）客户端发送一个http请求到服务器端；2）服务器端发送一个http响应到客户端，其中包含Set-Cookie头部；3）客户端发送一个http请求到服务器端，其中包含Cookie头部；4）服务器端发送一个http响应到客户端。</p>
+<p>这个通讯过程也可以用以下下示意图来描述：</p>
+<img src="1.png" width="50%">
+
+<p>Cookie 在性质上是绑定在特定域名下的，不可以跨域访问。</p>
+<h2 id="二、Session"><a href="#二、Session" class="headerlink" title="二、Session"></a>二、Session</h2><p>Session是另一种记录客户状态的机制，Cookie保存在客户端中，而Session保存在服务端。客户端访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是Session。客户端浏览器再次访问时只需要从该Session中查找该客户的状态就可以了。</p>
+<p>如果说Cookie机制是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/05/HTTP009/" data-id="clur520qo001jmocc7p6pfj7n" data-title="Cookie与Session" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/03/05/HTTP008/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数据协商
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/04/HTTP007/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HTTP长连接</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;">综合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/18/ZH002/">浏览器中的进程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/26/HTTP013/">HTTP缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/31/HTTP012/">JSONP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/HTTP011/">常见 Web 攻击总结</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Vue007/">【Vue3.x】Vue3响应式原理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

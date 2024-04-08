@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>（十）ES6：类与继承 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。 ​	在 ES6 中新增了class关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子： 1234567891011class People &#123;  c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（十）ES6：类与继承">
+<meta property="og:url" content="http://example.com/2021/02/22/ES010/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。 ​	在 ES6 中新增了class关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子： 1234567891011class People &#123;  c">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/02/22/ES010/1.jpeg">
+<meta property="og:image" content="http://example.com/2021/02/22/ES010/2.jpeg">
+<meta property="og:image" content="http://example.com/2021/02/22/ES010/3.png">
+<meta property="article:published_time" content="2021-02-22T12:19:12.000Z">
+<meta property="article:modified_time" content="2021-02-24T09:08:25.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="ES">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/02/22/ES010/1.jpeg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ES010" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/22/ES010/" class="article-date">
+  <time class="dt-published" datetime="2021-02-22T12:19:12.000Z" itemprop="datePublished">2021-02-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      （十）ES6：类与继承
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>关于 ES5 中的对象与继承（ES5 中并没有类的概念，我们可以用构造函数来模拟类），我推荐大家看《JavaScript 高级程序设计》的第六章，讲的非常详细。我们现在来看一下 ES6 对类与继承做了哪些更新。</p>
+<p>​	在 ES6 中新增了<code>class</code>关键字，用于声明类。与构造函数类似，我们也建议类名的首字母大写。我们来看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">showName</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="title class_">People</span>(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1)</span><br></pre></td></tr></table></figure>
+
+<p>我们来看一下输出：</p>
+<img src="1.jpeg" width="50%">
+
+<p>我们可以看出来，这和 ES5 中组合使用构造函数模式与原型模式得到的结果一致。所以我们也把 class 叫做“语法糖”，因为它可以让我们更快乐的写代码（因为写法更简单了嘿嘿）。我们在看一下 ES6 中如何实现继承，ES6 中出现了一个新的关键字<code>extends</code>用于类的继承。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Coder</span> <span class="keyword">extends</span> <span class="title class_ inherited__">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age, skill</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(name, age) <span class="comment">// 从父类People中继承name和age属性</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">skill</span> = skill</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">showSkill</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">skill</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c1 = <span class="keyword">new</span> <span class="title class_">Coder</span>(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;code&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c1)</span><br></pre></td></tr></table></figure>
+
+<p>我们在看一下输出结果：</p>
+<img src="2.jpeg" width="50%">
+
+<p>在 ES6 中，我们还可以使用设置方法的形式设置属性，具体看下例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">showName</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="title class_">People</span>(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1.<span class="property">sex</span>) <span class="comment">// female</span></span><br></pre></td></tr></table></figure>
+
+<p>我们通过<code>get</code>关键字设置了一个属性 sex，并且通过 p1.sex 读取了 sex 属性。但是 get 关键字总能够让 sex 属性被读，并不能让 sex 属性被写。想让 sex 属性被写我们还需要<code>set</code>。但是我们要注意不能这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误演示</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title function_">sex</span>(<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">sex</span> = val</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="title class_">People</span>(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line">p1.<span class="property">sex</span> = <span class="string">&#x27;male&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上代码会提示“Maximum call stack size exceeded”，原因是陷入了死循环。因为执行 p1.sex &#x3D; ‘male’ 时，会调用 set sex(){} 方法。set sex(){} 方法内部设置 this.sex &#x3D; val 时，也会调用 set sex(){} 方法， set sex(){} 方法内部执行 this.sex &#x3D; val 时又调用了  set sex(){} 方法。因此这是一个死循环，我们应该这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_sex</span> = <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">sex</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_sex</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title function_">sex</span>(<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_sex</span> = val</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="title class_">People</span>(<span class="string">&#x27;lily&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1.<span class="property">sex</span>) <span class="comment">// female</span></span><br><span class="line">p1.<span class="property">sex</span> = <span class="string">&#x27;male&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1.<span class="property">sex</span>) <span class="comment">// male</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们需要对值进行一些业务逻辑处理再进行读和写时，就应该使用这种方法。通过这种方式设置的属性也可以被子类继承。</p>
+<p>我们再看一下如何在 ES6 中定义静态属性和方法。ES6 中使用<code>static</code>关键字定义静态方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">getCount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">5</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">People</span>.<span class="title function_">getCount</span>()) <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+
+<p>ES6 的 class 内部目前并不能定义静态属性，我们可使用 ES5 中定义静态属性的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">People</span>.<span class="property">count</span> = <span class="number">1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">People</span>.<span class="property">count</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>再次强调：<strong>class 只是“语法糖”，使用 class 定义出的类，底层还是和 ES5 中组合使用构造函数和原型方式定义出的“类”一样。</strong>我们可以使用 type of 方式检测上面示例中的 People，结果是 function。</p>
+<p>下面的例子使用 babel 将 ES6 转化成 ES5，让大家更好的理解一下：</p>
+<img src="3.png">
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/22/ES010/" data-id="clur520qf000hmocc5xv7e9o5" data-title="（十）ES6：类与继承" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/02/23/ES011/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          （十一）ES6：新的原始数据类型 Symbol
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/02/19/ES009/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">（九）ES：深拷贝与浅拷贝、手写深拷贝函数</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;">综合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/18/ZH002/">浏览器中的进程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/26/HTTP013/">HTTP缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/31/HTTP012/">JSONP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/HTTP011/">常见 Web 攻击总结</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Vue007/">【Vue3.x】Vue3响应式原理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

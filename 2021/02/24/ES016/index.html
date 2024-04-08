@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>（十六）ES6：Number与Math的扩展 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、ES6 中表示二进制与八进制ES5 中二进制与十进制互相转换： 1234567&#x2F;&#x2F; 十进制 -&gt; 二进制const a &#x3D; 5console.log(a.toString(2)) &#x2F;&#x2F; 101&#x2F;&#x2F; 二进制 -&gt; 十进制const b &#x3D; 101console.log(parseInt(b, 2)) &#x2F;&#x2F;5  ES6 中使用0B表示二进制，0O表示八进制。（B和O大小写均可） 123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（十六）ES6：Number与Math的扩展">
+<meta property="og:url" content="http://example.com/2021/02/24/ES016/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、ES6 中表示二进制与八进制ES5 中二进制与十进制互相转换： 1234567&#x2F;&#x2F; 十进制 -&gt; 二进制const a &#x3D; 5console.log(a.toString(2)) &#x2F;&#x2F; 101&#x2F;&#x2F; 二进制 -&gt; 十进制const b &#x3D; 101console.log(parseInt(b, 2)) &#x2F;&#x2F;5  ES6 中使用0B表示二进制，0O表示八进制。（B和O大小写均可） 123">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/02/24/ES016/1.jpeg">
+<meta property="article:published_time" content="2021-02-24T05:42:12.000Z">
+<meta property="article:modified_time" content="2021-02-24T05:42:30.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="ES">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/02/24/ES016/1.jpeg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ES016" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/24/ES016/" class="article-date">
+  <time class="dt-published" datetime="2021-02-24T05:42:12.000Z" itemprop="datePublished">2021-02-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      （十六）ES6：Number与Math的扩展
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、ES6-中表示二进制与八进制"><a href="#一、ES6-中表示二进制与八进制" class="headerlink" title="一、ES6 中表示二进制与八进制"></a>一、ES6 中表示二进制与八进制</h2><p>ES5 中二进制与十进制互相转换：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 十进制 -&gt; 二进制</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="number">5</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a.<span class="title function_">toString</span>(<span class="number">2</span>)) <span class="comment">// 101</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 二进制 -&gt; 十进制</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">101</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseInt</span>(b, <span class="number">2</span>)) <span class="comment">//5</span></span><br></pre></td></tr></table></figure>
+
+<p>ES6 中使用<code>0B</code>表示二进制，<code>0O</code>表示八进制。（B和O大小写均可）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">0B101</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a) <span class="comment">//5</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">0O10</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b) <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+
+<p>严格模式中不允许使用0为前缀表示数值，这样会报错：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">0101</span> <span class="comment">// 报错，严格模式下不允许使用旧的八进制文字</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">0B0101</span> <span class="comment">// 0o和0b后跟0没关系，不会报错</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、ES6-中提供的新方法"><a href="#二、ES6-中提供的新方法" class="headerlink" title="二、ES6 中提供的新方法"></a>二、ES6 中提供的新方法</h2><h4 id="1）Number-isFinite"><a href="#1）Number-isFinite" class="headerlink" title="1）Number.isFinite()"></a>1）Number.isFinite()</h4><p>判断当前数值是否是有限的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(<span class="number">5</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(<span class="title class_">Infinity</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(<span class="string">&#x27;imooc&#x27;</span>)) <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(<span class="literal">true</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>补充：ES 中一个数除以 0 不会报错，输出结果是无穷大。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">5</span>/<span class="number">0</span>) <span class="comment">// Infinity</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2）Number-isNaN"><a href="#2）Number-isNaN" class="headerlink" title="2）Number.isNaN()"></a>2）Number.isNaN()</h4><p>判断当前参数是否是 NaN。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isNaN</span>(<span class="title class_">NaN</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">isNaN</span>(<span class="number">15</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>在 ES5 中，有一个方法为<code>isNaN()</code>，这个方法相当于 window.isNaN()。<strong>ES5 中将很多方法都挂载在了全局对象 window 上，导致全局对象很大。在 ES6 中逐步地将一些全局方法迁移到了相应的对象上。这样可以使全局对象变小且语言更加模块化。</strong></p>
+<h4 id="3）Number-parseInt-与-Number-parseFloat"><a href="#3）Number-parseInt-与-Number-parseFloat" class="headerlink" title="3）Number.parseInt() 与 Number.parseFloat()"></a>3）Number.parseInt() 与 Number.parseFloat()</h4><p>这两个方法也是从全局对象迁移到 Number 对象上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">parseInt</span>(<span class="number">5.5</span>)) <span class="comment">// 5</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">parseFloat</span>(<span class="number">5.5</span>)) <span class="comment">// 5.5</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4）Number-isInteger"><a href="#4）Number-isInteger" class="headerlink" title="4）Number.isInteger()"></a>4）Number.isInteger()</h4><p>判断当前数值是否为整数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isInteger</span>(<span class="number">5</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isInteger</span>(<span class="number">5.5</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5）Number-isSafeInteger"><a href="#5）Number-isSafeInteger" class="headerlink" title="5）Number.isSafeInteger()"></a>5）Number.isSafeInteger()</h4><p>用于判断给定参数是否是安全的整数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isSafeInteger</span>(<span class="title class_">Number</span>.<span class="property">MAX_SAFE_INTEGER</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isSafeInteger</span>(<span class="title class_">Number</span>.<span class="property">MAX_SAFE_INTEGER</span> + <span class="number">1</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>ES 中整数的最大值为2的53次方，最小值是负2的53次方。在 ES6 中提供了新的常量表示最大与最小安全整数，<code>Number.MAX_SAFE_INTEGER</code>表示最大的安全整数，<code>Number.MIN_SAFE_INTEGER</code>表示最小的安全整数。注意：Number.MAX_SAFE_INTEGER 等于2的53次方减1，Number.MIN_SAFE_INTEGER 等于负2的53次方加1。</p>
+<h2 id="三、ES6-中关于-Math-对象的新方法"><a href="#三、ES6-中关于-Math-对象的新方法" class="headerlink" title="三、ES6 中关于 Math 对象的新方法"></a>三、ES6 中关于 Math 对象的新方法</h2><h4 id="1）Math-trunc"><a href="#1）Math-trunc" class="headerlink" title="1）Math.trunc()"></a>1）Math.trunc()</h4><p>用于将一个值转化成整数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>(<span class="number">5.5</span>)) <span class="comment">// 5</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>(<span class="title class_">NaN</span>)) <span class="comment">// NaN</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>(<span class="literal">undefined</span>)) <span class="comment">// NaN</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>()) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<p>对于以上参数的转化结果与使用 Number.parseInt() 方法一致，我们再看一下两者的区别：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>(<span class="literal">true</span>)) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">trunc</span>(<span class="literal">false</span>)) <span class="comment">// 0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">parseInt</span>(<span class="literal">true</span>)) <span class="comment">// NaN</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="built_in">parseInt</span>(<span class="literal">false</span>)) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2）Math-sign"><a href="#2）Math-sign" class="headerlink" title="2）Math.sign()"></a>2）Math.sign()</h4><p>用于判断参数是正数、负数、还是0。正数返回1，负数返回-1，0返回0。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(<span class="number">5</span>)) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(-<span class="number">5</span>)) <span class="comment">// -1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(<span class="number">0</span>)) <span class="comment">// 0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(<span class="literal">true</span>)) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(<span class="literal">false</span>)) <span class="comment">// 0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">sign</span>(<span class="title class_">NaN</span>)) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3）Math-cbrt"><a href="#3）Math-cbrt" class="headerlink" title="3）Math.cbrt()"></a>3）Math.cbrt()</h4><p>用于计算一个数值的立方根。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">cbrt</span>(<span class="number">8</span>)) <span class="comment">// 2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">cbrt</span>(<span class="string">&#x27;imooc&#x27;</span>)) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+
+
+<img src="1.jpeg">
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/24/ES016/" data-id="clur520qi000tmocc52tpe664" data-title="（十六）ES6：Number与Math的扩展" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/" rel="tag">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/02/24/ES017/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          （十七）ES6：Proxy
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/02/23/ES015/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">（十五）ES6：正则表达式的扩展</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;">综合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/18/ZH002/">浏览器中的进程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/26/HTTP013/">HTTP缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/31/HTTP012/">JSONP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/HTTP011/">常见 Web 攻击总结</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Vue007/">【Vue3.x】Vue3响应式原理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

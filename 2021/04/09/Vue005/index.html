@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【Vue3.x】Vue3生命周期 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Vue3 支持 Options API 和 Composition API 。 一、Options API 的生命周期（基本与 Vue2 生命周期一致）类似于 Vue2 中的生命周期，只做了一点更改。 beforeDestroy 改为 beforeUnmount，destroyed 改为 unmounted，其他沿用 Vue2 的生命周期。 Options API 就是在一个 vue 文件中的 m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Vue3.x】Vue3生命周期">
+<meta property="og:url" content="http://example.com/2021/04/09/Vue005/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Vue3 支持 Options API 和 Composition API 。 一、Options API 的生命周期（基本与 Vue2 生命周期一致）类似于 Vue2 中的生命周期，只做了一点更改。 beforeDestroy 改为 beforeUnmount，destroyed 改为 unmounted，其他沿用 Vue2 的生命周期。 Options API 就是在一个 vue 文件中的 m">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/04/09/Vue005/1.png">
+<meta property="og:image" content="http://example.com/2021/04/09/Vue005/2.png">
+<meta property="og:image" content="http://example.com/2021/04/09/Vue005/3.png">
+<meta property="article:published_time" content="2021-04-09T02:52:43.000Z">
+<meta property="article:modified_time" content="2021-05-17T09:38:10.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/04/09/Vue005/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Vue005" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/09/Vue005/" class="article-date">
+  <time class="dt-published" datetime="2021-04-09T02:52:43.000Z" itemprop="datePublished">2021-04-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【Vue3.x】Vue3生命周期
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Vue3 支持 Options API 和 Composition API 。</p>
+<h2 id="一、Options-API-的生命周期（基本与-Vue2-生命周期一致）"><a href="#一、Options-API-的生命周期（基本与-Vue2-生命周期一致）" class="headerlink" title="一、Options API 的生命周期（基本与 Vue2 生命周期一致）"></a>一、Options API 的生命周期（基本与 Vue2 生命周期一致）</h2><p>类似于 Vue2 中的生命周期，只做了一点更改。</p>
+<p><code>beforeDestroy</code> 改为 <code>beforeUnmount</code>，<code>destroyed</code> 改为 <code>unmounted</code>，其他沿用 Vue2 的生命周期。</p>
+<p>Options API 就是在一个 vue 文件中的 methods、computed、watch、data 中等等定义属性和方法，共同处理页面逻辑。</p>
+<img src="1.png" width="40%">
+
+<p>用法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">beforeCreate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;beforeCreate&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">created</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;created&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title class_">BeforeMount</span>() &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;BeforeMount&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title class_">Mounted</span>() &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Mounted&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title class_">BeforeUpdata</span>() &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;BeforeUpdata&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title class_">Updated</span>() &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Updated&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title class_">BeforeUnMount</span>() &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;BeforeUnMount&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title class_">UnMounted</span>() &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;UnMounted&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>缺点：</strong> 一个功能往往需要在不同的 vue 配置项中定义属性和方法，比较分散，项目小还好，清晰明了；但是项目大了后，一个 methods 中可能包含非常多个方法，往往难以分清哪个方法对应着哪个功能。</p>
+<p>vue3 中的 Composition API 就是用来解决上述缺点的。</p>
+<h2 id="二、Composition-API-的生命周期（Vue3-新提出）"><a href="#二、Composition-API-的生命周期（Vue3-新提出）" class="headerlink" title="二、Composition API 的生命周期（Vue3 新提出）"></a>二、Composition API 的生命周期（Vue3 新提出）</h2><p>在 Vue3 Composition API 中，我们的代码是根据逻辑功能来组织的，一个功能所定义的所有 API 会放在一起（更加的高内聚，低耦合）。这样做，即时项目很大，功能很多，我们都能快速的定位到这个功能所用到的所有 API，而不像 Vue2 Options API，一个功能所用到的 API 都是分散的，需要改动功能，到处找API的过程是很费劲的。</p>
+<p><img src="2.png" width="35%"><img src="3.png" width="75%"></p>
+<p>用法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; onBeforeMount, onMounted, onBeforeUpdata, onUpdated, onBeforeUnMount, onUnMounted &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在生命周期的角度上等价于 beforeCreate 和 created</span></span><br><span class="line">  <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;setup&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="title function_">onBeforeMount</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;onBeforeMount&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="title function_">onMounted</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;onMounted&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="title function_">onBeforeUpdata</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;onBeforeUpdata&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="title function_">onUpdated</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;onUpdated&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="title function_">onBeforeUnMount</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;onBeforeUnMount&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="title function_">onUnMounted</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;onUnMounted&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Composition-API-带来了什么？"><a href="#Composition-API-带来了什么？" class="headerlink" title="Composition API 带来了什么？"></a>Composition API 带来了什么？</h4><ul>
+<li><p>更好的代码组织，根据逻辑相关性组织代码，提高可读性和可维护性</p>
+</li>
+<li><p>更好的逻辑复用，是基于函数组合的 API （在 Vue2 Options API 中通过 Mixins 重用逻辑代码，容易发生命名冲突且关系不清）</p>
+</li>
+<li><p>更好的类型推导</p>
+</li>
+</ul>
+<p>注意，Composition API 带来的好处并不是刚需，是给比较大比较复杂的项目使用的。</p>
+<h2 id="三、如何选择？"><a href="#三、如何选择？" class="headerlink" title="三、如何选择？"></a>三、如何选择？</h2><ul>
+<li>不建议 Options API 与 Composition API 共用，会引起混乱</li>
+<li>小型项目、业务逻辑简单，用 Options API</li>
+<li>中大型项目、逻辑复杂，用 Composition API（Composition API 就是为了解决复杂场景的业务逻辑而设计的）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/09/Vue005/" data-id="clur520qy0023mocccgxk73pu" data-title="【Vue3.x】Vue3生命周期" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/10/Vue006/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【Vue3.x】ref、toRef、toRefs
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/24/ES021/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">（二十一）ES6：Iterator</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;">综合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/18/ZH002/">浏览器中的进程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/26/HTTP013/">HTTP缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/31/HTTP012/">JSONP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/HTTP011/">常见 Web 攻击总结</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Vue007/">【Vue3.x】Vue3响应式原理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

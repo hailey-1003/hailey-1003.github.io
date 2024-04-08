@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【Vue】虚拟DOM | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="虚拟DOM（Virtual DOM）简称 vdom，是实现 Vue 的重要基石。 众所周知，DOM 操作非常耗时，相对来说， JS 的操作是很快的。在 Vue 等框架之前，我们一般是使用 jQuery，jQuery 可以自行控制 DOM 操作的时机，手动调整。而 Vue 是数据驱动视图，一般都是操作数据，而不会直接操作 DOM，此时我们应该如何有效操作 DOM 呢？ 解决方案：vdom。vdom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Vue】虚拟DOM">
+<meta property="og:url" content="http://example.com/2021/03/17/Vue003/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="虚拟DOM（Virtual DOM）简称 vdom，是实现 Vue 的重要基石。 众所周知，DOM 操作非常耗时，相对来说， JS 的操作是很快的。在 Vue 等框架之前，我们一般是使用 jQuery，jQuery 可以自行控制 DOM 操作的时机，手动调整。而 Vue 是数据驱动视图，一般都是操作数据，而不会直接操作 DOM，此时我们应该如何有效操作 DOM 呢？ 解决方案：vdom。vdom">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/03/17/Vue003/1.png">
+<meta property="article:published_time" content="2021-03-17T13:38:12.000Z">
+<meta property="article:modified_time" content="2021-05-11T08:18:26.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/03/17/Vue003/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Vue003" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/17/Vue003/" class="article-date">
+  <time class="dt-published" datetime="2021-03-17T13:38:12.000Z" itemprop="datePublished">2021-03-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【Vue】虚拟DOM
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>虚拟DOM（Virtual DOM）简称 vdom，是实现 Vue 的重要基石。</p>
+<p>众所周知，DOM 操作非常耗时，相对来说， JS 的操作是很快的。在 Vue 等框架之前，我们一般是使用 jQuery，jQuery 可以自行控制 DOM 操作的时机，手动调整。而 Vue 是数据驱动视图，一般都是操作数据，而不会直接操作 DOM，此时我们应该如何有效操作 DOM 呢？</p>
+<p>解决方案：vdom。vdom 最初是由 React 提出的，后来得到了大力地普及。由于现在的页面越来越复杂，想减少页面的计算次数比较困难，因此把更多的计算转移为 JS 计算，因为现在 JS 的执行速度非常快。<strong>vdom 就是使用 JS 模拟 DOM 结构，计算出最小的变更，再操作 DOM。</strong></p>
+<p>使用 JS 模拟 DOM 结构，示例如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;div1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">style</span>=<span class="string">&quot;font-size: 20px&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>a<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JS 对象</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">tag</span>: <span class="string">&#x27;div&#x27;</span>,</span><br><span class="line">  <span class="attr">props</span>: &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;div1&#x27;</span>,</span><br><span class="line">    <span class="attr">className</span>: <span class="string">&#x27;container&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">children</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">tag</span>: <span class="string">&#x27;p&#x27;</span>,</span><br><span class="line">      <span class="attr">children</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">tag</span>: <span class="string">&#x27;ul&#x27;</span>,</span><br><span class="line">      <span class="attr">props</span>: &#123; <span class="attr">style</span>: <span class="string">&#x27;font-size: 20px&#x27;</span> &#125;,</span><br><span class="line">      <span class="attr">children</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">tag</span>: <span class="string">&#x27;li&#x27;</span>,</span><br><span class="line">          <span class="attr">children</span>: <span class="string">&#x27;a&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（以上的写法并不是唯一的写法，不同的框架写法可能不一样，但是都大同小异，都是主要包括标签名、属性、子节点。）</p>
+<p>使用 JS 模拟了 DOM 结构之后，应该如何去使用呢？接下来我们通过 snabbdom 学习 vdom。snabbdom 是一个简洁强大的 vdom 库，Vue 就是参考它实现的 vdom 和 diff。</p>
+<p>snabbdom 官网：<a target="_blank" rel="noopener" href="https://github.com/snabbdom/snabbdom">https://github.com/snabbdom/snabbdom</a></p>
+<p>（注意：Vue3.0 中重写了 vdom 的代码，优化了性能，可能和现在 snabbdom 的实现方式有所不同，但是 vdom 的基本理念不变。）</p>
+<p>snabbdom 的使用重点是：① h函数（根据传递进来的参数，返回一个 vnode 对象）；② vnode 对象（用来表示相应的 dom 结构）；③ patch 函数（找到最小更新范围并更新 DOM 节点）。</p>
+<p>看一个使用示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn-change&quot;</span>&gt;</span>change<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-class.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-props.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-style.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-eventlisteners.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/snabbdom/0.7.3/h.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> snabbdom = <span class="variable language_">window</span>.<span class="property">snabbdom</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 定义 patch</span></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> patch = snabbdom.<span class="title function_">init</span>([</span></span><br><span class="line"><span class="language-javascript">        snabbdom_class,</span></span><br><span class="line"><span class="language-javascript">        snabbdom_props,</span></span><br><span class="line"><span class="language-javascript">        snabbdom_style,</span></span><br><span class="line"><span class="language-javascript">        snabbdom_eventlisteners</span></span><br><span class="line"><span class="language-javascript">      ])</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 定义 h</span></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> h = snabbdom.<span class="property">h</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> container = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#container&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 生成 vnode</span></span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// h 函数第一个参数是标签名（也可以加上id和class），第二个参数是属性，第三个参数是子节点</span></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> vnode = <span class="title function_">h</span>(<span class="string">&#x27;ul#list&#x27;</span>, &#123;&#125;, [</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">h</span>(<span class="string">&#x27;li.item&#x27;</span>, &#123;&#125;, <span class="string">&#x27;Item 1&#x27;</span>),</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">h</span>(<span class="string">&#x27;li.item&#x27;</span>, &#123;&#125;, <span class="string">&#x27;Item 2&#x27;</span>),</span></span><br><span class="line"><span class="language-javascript">      ])</span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">patch</span>(container, vnode)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#btn-change&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 生成 vnode</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> newNode = <span class="title function_">h</span>(<span class="string">&#x27;ul#list&#x27;</span>, &#123;&#125;, [</span></span><br><span class="line"><span class="language-javascript">          <span class="title function_">h</span>(<span class="string">&#x27;li.item&#x27;</span>, &#123;&#125;, <span class="string">&#x27;Item 1&#x27;</span>),</span></span><br><span class="line"><span class="language-javascript">          <span class="title function_">h</span>(<span class="string">&#x27;li.item&#x27;</span>, &#123;&#125;, <span class="string">&#x27;Item 3&#x27;</span>),</span></span><br><span class="line"><span class="language-javascript">          <span class="title function_">h</span>(<span class="string">&#x27;li.item&#x27;</span>, &#123;&#125;, <span class="string">&#x27;Item 2&#x27;</span>),</span></span><br><span class="line"><span class="language-javascript">        ])</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">patch</span>(vnode, newNode)</span></span><br><span class="line"><span class="language-javascript">      &#125;)</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们需要观察一下点击按钮后 dom 结构的变化：</p>
+<img src="1.png" width="80%">
+
+<p>只有下面两个 li 标签出现了闪动，说明只有下面两个标签进行了重新渲染，而第一个 li 标签并未重新渲染！从这里我们可以看出 vdom 的优势：它会将新旧 vnode 进行对比，得到最小的更新范围，再更新 DOM 。只有这样，我们才能在数据驱动视图的模式下，有效地控制 DOM 操作。</p>
+<h4 id="vdom总结："><a href="#vdom总结：" class="headerlink" title="vdom总结："></a>vdom总结：</h4><ul>
+<li>使用 JS 模拟 DOM 结构（vnode）</li>
+<li>进行新旧 vnode 对比，得出最小的更新范围，最后更新 DOM </li>
+<li>在数据驱动视图的模式下，可以有效控制 DOM 操作</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/17/Vue003/" data-id="clur520qq001tmoccd78g6r1w" data-title="【Vue】虚拟DOM" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/03/18/Vue004/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【Vue】diff算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/17/Vue002/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【Vue】Vue2.x响应式原理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/" rel="tag">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E5%90%88/" rel="tag">综合</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 20px;">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;">综合</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/18/ZH002/">浏览器中的进程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/26/HTTP013/">HTTP缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/31/HTTP012/">JSONP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/26/HTTP011/">常见 Web 攻击总结</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/17/Vue007/">【Vue3.x】Vue3响应式原理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
