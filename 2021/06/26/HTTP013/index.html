@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 7.0.0">
+
+  
+
+  
+
+  
+    <meta name="author" content="Litchi">
+  
+
+  
+
+  
+
+  <title>HTTP缓存 | keeppassion</title>
+
+  
+
+  
+
+  <!--mathjax latex数学公式显示支持-->
+  
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(/bgc.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          keeppassion
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">HTTP缓存</h1>
+          <h2 class="title-sub-wrap">
+            <strong>Litchi</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2021-06-26T09:41:53.000Z" itemprop="datePublished">2021-06-26</time>
+          </h2>
+          
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2021-07-16T02:26:18.000Z" itemprop="dateUpdated">2021-07-16</time>
+            </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+    <li><a href="/tags/HTTP/">🏷️ HTTP</a></li>
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>当客户端向服务器请求资源时，会先抵达浏览器缓存，如果浏览器中有要请求资源的副本，就可以直接从浏览器缓存中提取，而不是向原始服务器请求这个资源。</p>
+<p>常见的 HTTP 缓存只能缓存 GET 请求响应的资源，对其他类型的响应无能为力，因此后续说的请求缓存指的都是 GET 请求。</p>
+<p>HTTP 缓存都是从第二次请求开始的。第一次请求资源时，服务器返回资源，并在 response header 中回传资源的缓存参数。第二次请求时，浏览器判断这些请求参数，命中强缓存则直接返回 200；否则把请求参数添加到 request header 中传给服务器，看是否命中协商缓存，命中则返回 304；否则服务器就会返回新的资源。</p>
+<h2 id="二、HTTP-缓存的分类"><a href="#二、HTTP-缓存的分类" class="headerlink" title="二、HTTP 缓存的分类"></a>二、HTTP 缓存的分类</h2><p>根据是否需要重新向服务器发起请求进行分类， 可分为：强缓存、协商缓存。</p>
+<p>根据式被单个用户室友还是多个用户使用进行分类，可分为：私有缓存、共享缓存。</p>
+<p>强缓存如果生效，则不再需要再和服务器进行交互。协商缓存无论是否生效，都需要与服务器进行交互。</p>
+<img src="1.png" style="zoom:50%;">
+
+<h3 id="2-1-强缓存"><a href="#2-1-强缓存" class="headerlink" title="2.1 强缓存"></a>2.1 强缓存</h3><p>强缓存在缓存数据未失效的情况下，会直接使用浏览器的缓存数据，不会再向服务器发送任何请求。强缓存生效时，HTTP 状态码为 200。这种方式页面的加载速度是最快的，性能也是很好的，但是在这期间，如果服务端的资源修改了，浏览器是拿不到的，因为它不会再向服务器发送请求了。这种情况在我们的开发中经常遇到，因为走的是强缓存，所以一般 Ctrl+F5 一顿操作之后就好了。</p>
+<p>与强缓存相关的 header 头有：Pragma、Cache-Control、Expires。</p>
+<h4 id="①-Pragma"><a href="#①-Pragma" class="headerlink" title="① Pragma"></a>① Pragma</h4><p>Pragma 是 HTTP&#x2F;1.1 之前版本的历史遗留字段，仅作为与 HTTP&#x2F;1.0 的向后兼容而定义。规范定义的形式唯一，如下所示。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Pragma</span><span class="punctuation">: </span>no-cache</span><br></pre></td></tr></table></figure>
+
+<p>该首部字段属于通用首部字段，但只用在客户端发送的请求中。客户端会要求所有的中间服务器不返回缓存的资源。</p>
+<p>所有的中间服务器如果都能以 HTTP&#x2F;1.1 为基准，那直接采用 Cache-Control: no-cache 指定缓存的处理方式是最为理想的。但要整体掌握全部中间服务器使用的 HTTP 协议版本却是不现实的。因此，发送的请求会同时含有下面两个首部字段：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-Control</span><span class="punctuation">: </span>no-cache</span><br><span class="line"><span class="attribute">Pragma</span><span class="punctuation">: </span>no-cache</span><br></pre></td></tr></table></figure>
+
+<h4 id="②-Cache-control"><a href="#②-Cache-control" class="headerlink" title="② Cache-control"></a>② Cache-control</h4><p>Cache-control 为通用首部字段，通过指定 Cache-control 的指令，就能操作缓存的工作机制。指令的参数是可选的，多个请求之间通过 “,” 分割。Cache-control 的指令可用于请求时及响应时。例如：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Cache-control</span><span class="punctuation">: </span>private, max-age=0, no-cache</span><br></pre></td></tr></table></figure>
+
+<p>Cache-control 常用指令：</p>
+<ul>
+<li><code>public</code>：表明其他用户也可以利用缓存。</li>
+</ul>
+<ul>
+<li><p><code>private</code>：缓存服务器只对特定用户提供资源缓存的服务，对于其他用户发送过来的请求，代理服务器则不会返回缓存。</p>
+</li>
+<li><p><code>no-cache</code>：客户端不会接收缓存过的响应，强制向源服务器再次验证。</p>
+</li>
+<li><p><code>no-store</code>：不能缓存请求或响应的任何内容。</p>
+</li>
+<li><p><code>max-age=xxx[秒]</code>：缓存内容将在 xxx 秒后失效。应用 HTTP&#x2F;1.1 版本的缓存服务器，在同时遇到 max-age 指令和 Expires 首部字段时，会优先处理 max-age 指令，而忽略 Expires。而 HTTP&#x2F;1.0 版本的缓存服务器的情况则相反，max-age 指令会被忽略。</p>
+</li>
+</ul>
+<h4 id="③-Expires"><a href="#③-Expires" class="headerlink" title="③ Expires"></a>③ Expires</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Expires</span><span class="punctuation">: </span>Wed, 04 Jul 2021 08:26:05 GMT</span><br></pre></td></tr></table></figure>
+
+<p>首部字段 Expires 会将资源失效的日期告知客户端。缓存服务器在接收到含有首部字段 Expires 的响应后，会以缓存来应答请求，在 Expires 字段值指定的时间之前，响应的副本会一直被保存。当超过指定的时间后，缓存服务器在请求发过来时，会转向源服务器请求资源。</p>
+<p>源服务器不希望缓存服务器对资源缓存时，最好在 Expires 字段内写入与首部字段 Date 相同的值。</p>
+<h5 id="Expires-存在的问题：服务器与客户端的时间不一致会出现问题。"><a href="#Expires-存在的问题：服务器与客户端的时间不一致会出现问题。" class="headerlink" title="Expires 存在的问题：服务器与客户端的时间不一致会出现问题。"></a>Expires 存在的问题：服务器与客户端的时间不一致会出现问题。</h5><p>到了 HTTP&#x2F;1.1，Expires 已经被 Cache-Control 替代，原因在于 Expires 控制缓存的原理是<strong>使用客户端的时间与服务端返回的时间做对比</strong>，如果客户端与服务端的时间由于某些原因（时区不同、客户端和服务端有一方的时间不准确）发生误差，强制缓存就会直接失效，那么强制缓存的存在就毫无意义。</p>
+<h3 id="2-2-协商缓存"><a href="#2-2-协商缓存" class="headerlink" title="2.2 协商缓存"></a>2.2 协商缓存</h3><p>当第一次请求时，服务器返回的响应头中 (1)没有 Cache-Control 和 Expires 或 (2)Cache-Control 的设置为 no-cache 或 (3)Cache-Control 和 Expires 过期了，那么浏览器第二次请求时就会与服务器进行协商，与服务器对比判断资源是否进行了修改更新。如果服务器的资源没有修改，那么就会返回 304 状态码。告诉浏览器可以使用缓存中的数据，这样就减少了服务器数据传输的压力。如果数据有更新，就会返回 200 状态码，服务器就会返回更新后的资源，并将缓存信息一起返回。</p>
+<p>与协商缓存相关的 header 头有：ETag&#x2F;If-None-Match 、Last-Modified&#x2F;If-Modified-Since，请求头和响应头需要成对出现。</p>
+<h4 id="①-ETag"><a href="#①-ETag" class="headerlink" title="① ETag"></a>① ETag</h4><p>ETag 能告知客户端实体标记。它是一种可将资源以字符串形式做唯一性标识的方式。服务器会为每份资源分配对应的 ETag 值。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ETag</span><span class="punctuation">: </span>“5b2a6fb4-3166”</span><br></pre></td></tr></table></figure>
+
+<p>当资源更新时，ETag 值也需要更新。生成 ETag 值并没有统一的算法规则，而仅仅是由服务器来分配。</p>
+<p>资源被缓存时，就会分配唯一性标识。例如，当使用中文版浏览器访问谷歌时，就会返回中文版对应的资源，而使用英文版的浏览器访问时，就会返回英文版对应的资源。两者的 URL 是相同的，所以仅凭 URI 指定缓存的资源是相当困难的。若在下载过程中出现中断、再连接的情况，都会依照 ETag 值来指定资源。</p>
+<p>ETag 中有强 ETag 值和弱 ETag 值之分：</p>
+<ul>
+<li>强 ETag：无论实体发生多么细微的变换都会改变其值。</li>
+<li>弱 ETag：只用于提示资源是否相同，只有资源发生了根本改变，ETag 值才会改变。这时会在字段最开始处附加 W&#x2F;。</li>
+</ul>
+<h4 id="②-If-None-Match"><a href="#②-If-None-Match" class="headerlink" title="② If-None-Match"></a>② If-None-Match</h4><p>服务器会比对 If-None-Match 的字段值和资源的 Etag 值，若不一致，则服务器处理该请求。</p>
+<h4 id="③-Last-Modified"><a href="#③-Last-Modified" class="headerlink" title="③ Last-Modified"></a>③ Last-Modified</h4><p>Last-Modified 指定资源最终修改的时间。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Last-Modified</span><span class="punctuation">: </span>Wed, 04 Jul 2021 08:26:05 GMT</span><br></pre></td></tr></table></figure>
+
+<h4 id="④-If-Modified-Since"><a href="#④-If-Modified-Since" class="headerlink" title="④ If-Modified-Since"></a>④ If-Modified-Since</h4><p>若资源在 If-Modified-Since 指定的时间之后更新过，则服务器处理该请求。否则服务器返回 304 状态码。</p>
+<p>If-Modified-Since 用于确认代理或客户端拥有的本地资源的有效性。获取资源的更新日期时间，可以通过首部字段 Last-Modified 来确定。</p>
+<h4 id="ETag-x2F-If-Not-Match-是在-HTTP-x2F-1-1-出现的，主要是解决以下问题："><a href="#ETag-x2F-If-Not-Match-是在-HTTP-x2F-1-1-出现的，主要是解决以下问题：" class="headerlink" title="ETag&#x2F;If-Not-Match 是在 HTTP&#x2F;1.1 出现的，主要是解决以下问题："></a>ETag&#x2F;If-Not-Match 是在 HTTP&#x2F;1.1 出现的，主要是解决以下问题：</h4><ol>
+<li>Last-Modified 标注的最后修改时间只能精确到秒级，如果某些文件在 1 秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间。</li>
+<li>如果某些文件被修改了，但是内容并没有任何变化，而 Last-Modified 却改变了，导致文件没法使用缓存。</li>
+<li>有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形。</li>
+</ol>
+<img src="2.png" style="zoom:50%;">
+
+<h3 id="2-3-私有缓存（浏览器级缓存）"><a href="#2-3-私有缓存（浏览器级缓存）" class="headerlink" title="2.3 私有缓存（浏览器级缓存）"></a>2.3 私有缓存（浏览器级缓存）</h3><p>私有缓存只能用于特定的用户：<code>Cache-Control: Private</code></p>
+<h3 id="2-4-共享缓存（代理级缓存）"><a href="#2-4-共享缓存（代理级缓存）" class="headerlink" title="2.4 共享缓存（代理级缓存）"></a>2.4 共享缓存（代理级缓存）</h3><p>共享缓存可以被多个用户使用：<code>Cache-Control: Public</code></p>
+<h2 id="三、HTTP-缓存的有点"><a href="#三、HTTP-缓存的有点" class="headerlink" title="三、HTTP 缓存的有点"></a>三、HTTP 缓存的有点</h2><ol>
+<li>减缓了服务器的压力，提高了网站的性能</li>
+<li>加快了客户端加载网页的速度</li>
+<li>减少了冗余的数据传输，节省了网费，降低了网络拥塞</li>
+</ol>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2021/07/18/ZH002/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">浏览器中的进程</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2021/05/31/HTTP012/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">JSONP</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="/headicon.jpg" class="soft-size--round soft-style--box" alt="Litchi">
+    
+    
+      <h2>Litchi</h2>
+    
+    
+      <p>怕什么真理无穷，进一寸有一寸的欢喜</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>41</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        4
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+
+      <section class="widget-categories widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+      <span>CATEGORIES</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categories-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/ES/" style="font-size: 20px;" class="tags-cloud-10">ES</a> <a href="/tags/HTTP/" style="font-size: 16.67px;" class="tags-cloud-7">HTTP</a> <a href="/tags/Vue/" style="font-size: 13.33px;" class="tags-cloud-3">Vue</a> <a href="/tags/%E7%BB%BC%E5%90%88/" style="font-size: 10px;" class="tags-cloud-0">综合</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+    </div>
+     
+    <p>&copy; 2024 <a href="/" target="_blank">Litchi</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  <!-- aplayer -->
+
+
+<!-- dplayer -->
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>
